@@ -1,4 +1,4 @@
-package com.gmail.mateuszmonas.androidtodomvp.data;
+package com.gmail.mateuszmonas.androidtodomvp.data.objects;
 
 import android.os.Parcel;
 import android.os.Parcelable;

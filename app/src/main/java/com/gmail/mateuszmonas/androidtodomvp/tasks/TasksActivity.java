@@ -18,5 +18,10 @@ public class TasksActivity extends AppCompatActivity {
             tasksFragment = TasksFragment.newInstance();
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), tasksFragment, R.id.contentFrame);
         }
+
+        DaggerTasksComponent.builder()
+                .tasksPresenterModule(new TasksPresenterModule(tasksFragment))
+                .build()
+                .inject(this);
     }
 }
