@@ -17,7 +17,7 @@ public class ToDoApplication extends Application {
         super.onCreate();
 
         dataRepositoryComponent = DaggerDataRepositoryComponent.builder()
-                .netModule(new NetModule("placeholder", "placeholder", "placeholder"))
+                .netModule(new NetModule("placeholder", "placeholder", "https://localhost"))
                 .dataSourceModule(new DataSourceModule()).build();
     }
 
