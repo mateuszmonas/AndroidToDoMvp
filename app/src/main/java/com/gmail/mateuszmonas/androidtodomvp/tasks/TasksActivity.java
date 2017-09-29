@@ -6,7 +6,12 @@ import android.os.Bundle;
 import com.gmail.mateuszmonas.androidtodomvp.R;
 import com.gmail.mateuszmonas.androidtodomvp.utils.ActivityUtils;
 
+import javax.inject.Inject;
+
 public class TasksActivity extends AppCompatActivity {
+
+    @Inject
+    TasksPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
