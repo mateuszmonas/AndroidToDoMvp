@@ -70,6 +70,12 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         presenter.start();
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
     public static TasksFragment newInstance(){
         return new TasksFragment();
     }
