@@ -5,7 +5,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
+
+import java.util.List;
+
 public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> {
+
+    private final List<Task> tasks;
+    private final TasksFragment.TasksListListener listener;
+
+    TasksAdapter(List<Task> tasks, TasksFragment.TasksListListener listener) {
+        this.tasks = tasks;
+        this.listener = listener;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
