@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,15 @@ public class TasksFragment extends Fragment implements TasksContract.View {
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
     private final TasksListListener listener = new TasksListListener() {
+        @Override
+        public void setTaskDone() {
+            Log.d("TaskListListener", "setTaskDone");
+        }
 
+        @Override
+        public void editTask() {
+            Log.d("TaskListListener", "editTask");
+        }
     };
 
     public static TasksFragment newInstance(){
@@ -98,5 +107,10 @@ public class TasksFragment extends Fragment implements TasksContract.View {
     }
 
     interface TasksListListener{
+
+        void setTaskDone();
+
+        void editTask();
+
     }
 }

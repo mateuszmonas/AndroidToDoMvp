@@ -36,7 +36,7 @@ public class Task implements Parcelable {
         _done=false;
     }
 
-    int get_id() {
+    public int get_id() {
         return _id;
     }
 
@@ -44,7 +44,7 @@ public class Task implements Parcelable {
         this._id = _id;
     }
 
-    String get_description() {
+    public String get_description() {
         return _description;
     }
 
@@ -52,7 +52,7 @@ public class Task implements Parcelable {
         this._description = _description;
     }
 
-    boolean is_done() {
+    public boolean is_done() {
         return _done;
     }
 

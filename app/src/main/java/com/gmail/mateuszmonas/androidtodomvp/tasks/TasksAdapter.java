@@ -37,10 +37,19 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Task task = tasks.get(position);
         holder.task = task;
+        holder.isDone.setChecked(task.is_done());
+        holder.taskDescription.setText(task.get_description());
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TaskAdapter", "task was clicked");
+                listener.setTaskDone();
+            }
+        });
+        holder.view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                listener.editTask();
+                return true;
             }
         });
     }
@@ -74,7 +83,6 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
             super(view);
             this.view=view;
             ButterKnife.bind(this, view);
-            taskDescription.setText("asdasd");
         }
     }
 
