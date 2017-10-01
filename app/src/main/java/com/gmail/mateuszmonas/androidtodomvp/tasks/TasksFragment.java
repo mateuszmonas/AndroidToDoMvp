@@ -61,6 +61,12 @@ public class TasksFragment extends Fragment implements TasksContract.View {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                presenter.loadTasks(0, true);
+            }
+        });
         return view;
     }
 

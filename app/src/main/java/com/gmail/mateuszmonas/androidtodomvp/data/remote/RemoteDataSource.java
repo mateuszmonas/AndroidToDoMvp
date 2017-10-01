@@ -29,14 +29,6 @@ public class RemoteDataSource implements DataSource {
 
     @Override
     public void getTasks(CallbackServerResponse<ArrayList<Task>> callback, int offset) {
-        //dummy data
-        ArrayList<Task> tasks = new ArrayList<>();
-        tasks.add(new Task("asdasd", false));
-        tasks.add(new Task("asdasd", false));
-        tasks.add(new Task("asdasd", false));
-        tasks.add(new Task("asdasd", false));
-        tasks.add(new Task("asdasd", false));
-        callback.onResponse(tasks);
     }
 
     interface ApiEndpoint{
