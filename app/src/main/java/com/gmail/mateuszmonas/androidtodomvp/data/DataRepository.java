@@ -5,6 +5,8 @@ import com.gmail.mateuszmonas.androidtodomvp.data.local.Local;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 import com.gmail.mateuszmonas.androidtodomvp.data.remote.Remote;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
 public class DataRepository implements DataSource {
@@ -19,7 +21,7 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public void getTasks(CallbackServerResponse<Task> tasks, int offset) {
+    public void getTasks(CallbackServerResponse<ArrayList<Task>> callback, int offset) {
 
     }
 }

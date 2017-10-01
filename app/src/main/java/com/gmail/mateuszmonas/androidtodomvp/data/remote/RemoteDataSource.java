@@ -5,6 +5,8 @@ import com.gmail.mateuszmonas.androidtodomvp.data.DataSource;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
 import okhttp3.OkHttpClient;
@@ -26,8 +28,15 @@ public class RemoteDataSource implements DataSource {
     }
 
     @Override
-    public void getTasks(CallbackServerResponse<Task> tasks, int offset) {
-
+    public void getTasks(CallbackServerResponse<ArrayList<Task>> callback, int offset) {
+        //dummy data
+        ArrayList<Task> tasks = new ArrayList<>();
+        tasks.add(new Task("asdasd", false));
+        tasks.add(new Task("asdasd", false));
+        tasks.add(new Task("asdasd", false));
+        tasks.add(new Task("asdasd", false));
+        tasks.add(new Task("asdasd", false));
+        callback.onResponse(tasks);
     }
 
     interface ApiEndpoint{

@@ -2,6 +2,7 @@ package com.gmail.mateuszmonas.androidtodomvp.tasks;
 
 
 import com.gmail.mateuszmonas.androidtodomvp.data.DataRepository;
+import com.gmail.mateuszmonas.androidtodomvp.data.DataSource;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 
 import java.util.ArrayList;
@@ -30,15 +31,19 @@ public class TasksPresenter implements TasksContract.Presenter {
     }
 
     @Override
-    public void loadTasks(int offset, boolean forceUpdate) {
+    public void loadTasks(int offset, final boolean forceUpdate) {
         view.setRefreshingView(true);
-        //dummy data
-        ArrayList<Task> tasks = new ArrayList<>();
-        tasks.add(new Task("asdasd", false));
-        tasks.add(new Task("asdasd", false));
-        tasks.add(new Task("asdasd", false));
-        tasks.add(new Task("asdasd", false));
-        view.setRefreshingView(false);
-        view.showTasks(tasks, forceUpdate);
+        repository.getTasks(new DataSource.CallbackServerResponse<ArrayList<Task>>() {
+            @Override
+            public void onResponse(ArrayList<Task> response) {
+                view.setRefreshingView(false);
+                view.showTasks(response, forceUpdate);
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        }, offset);
     }
 }
