@@ -2,6 +2,7 @@ package com.gmail.mateuszmonas.androidtodomvp.data.remote;
 
 
 import com.gmail.mateuszmonas.androidtodomvp.data.DataSource;
+import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 import com.google.gson.Gson;
 
 import javax.inject.Inject;
@@ -22,6 +23,11 @@ public class RemoteDataSource implements DataSource {
         this.gson = gson;
         this.okHttpClient = okHttpClient;
         this.api = retrofit.create(ApiEndpoint.class);
+    }
+
+    @Override
+    public void getTasks(CallbackServerResponse<Task> tasks, int offset) {
+
     }
 
     interface ApiEndpoint{

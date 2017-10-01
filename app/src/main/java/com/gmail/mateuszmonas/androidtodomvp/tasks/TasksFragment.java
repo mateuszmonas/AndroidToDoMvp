@@ -14,6 +14,7 @@ import com.gmail.mateuszmonas.androidtodomvp.R;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,6 +32,10 @@ public class TasksFragment extends Fragment implements TasksContract.View {
     private final TasksListListener listener = new TasksListListener() {
 
     };
+
+    public static TasksFragment newInstance(){
+        return new TasksFragment();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,8 +81,14 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         unbinder.unbind();
     }
 
-    public static TasksFragment newInstance(){
-        return new TasksFragment();
+    @Override
+    public void showTasks(List<Task> tasks, boolean forceUpdate) {
+        adapter.replaceData(tasks, forceUpdate);
+    }
+
+    @Override
+    public void setRefreshingView(boolean refreshing) {
+        swipeRefreshLayout.setRefreshing(refreshing);
     }
 
     interface TasksListListener{

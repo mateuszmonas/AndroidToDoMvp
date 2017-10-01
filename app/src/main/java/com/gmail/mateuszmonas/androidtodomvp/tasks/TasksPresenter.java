@@ -2,6 +2,9 @@ package com.gmail.mateuszmonas.androidtodomvp.tasks;
 
 
 import com.gmail.mateuszmonas.androidtodomvp.data.DataRepository;
+import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -24,5 +27,18 @@ public class TasksPresenter implements TasksContract.Presenter {
     @Override
     public void start() {
 
+    }
+
+    @Override
+    public void loadTasks(int offset, boolean forceUpdate) {
+        view.setRefreshingView(true);
+        //dummy data
+        ArrayList<Task> tasks = new ArrayList<>();
+        tasks.add(new Task("asdasd", false));
+        tasks.add(new Task("asdasd", false));
+        tasks.add(new Task("asdasd", false));
+        tasks.add(new Task("asdasd", false));
+        view.setRefreshingView(false);
+        view.showTasks(tasks, forceUpdate);
     }
 }
