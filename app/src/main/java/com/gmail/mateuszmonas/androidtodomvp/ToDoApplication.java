@@ -5,8 +5,7 @@ import android.app.Application;
 
 import com.gmail.mateuszmonas.androidtodomvp.data.DaggerDataRepositoryComponent;
 import com.gmail.mateuszmonas.androidtodomvp.data.DataRepositoryComponent;
-import com.gmail.mateuszmonas.androidtodomvp.data.local.LocalDataSourceModule;
-import com.gmail.mateuszmonas.androidtodomvp.data.remote.RemoteDataSourceModule;
+import com.gmail.mateuszmonas.androidtodomvp.data.DataSourceModule;
 import com.gmail.mateuszmonas.androidtodomvp.utils.NetModule;
 
 public class ToDoApplication extends Application {
@@ -19,8 +18,7 @@ public class ToDoApplication extends Application {
 
         dataRepositoryComponent = DaggerDataRepositoryComponent.builder()
                 .netModule(new NetModule("placeholder", "placeholder", "https://localhost"))
-                .remoteDataSourceModule(new RemoteDataSourceModule())
-                .localDataSourceModule(new LocalDataSourceModule())
+                .dataSourceModule(new DataSourceModule())
                 .build();
     }
 

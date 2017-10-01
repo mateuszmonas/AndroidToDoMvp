@@ -18,7 +18,7 @@ public class RemoteDataSource implements DataSource {
     private final ApiEndpoint api;
 
     @Inject
-    RemoteDataSource(Retrofit retrofit, Gson gson, OkHttpClient okHttpClient) {
+    public RemoteDataSource(Retrofit retrofit, Gson gson, OkHttpClient okHttpClient) {
         this.retrofit = retrofit;
         this.gson = gson;
         this.okHttpClient = okHttpClient;
