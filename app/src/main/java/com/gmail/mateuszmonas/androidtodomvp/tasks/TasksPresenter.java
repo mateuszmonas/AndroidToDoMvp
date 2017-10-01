@@ -48,7 +48,18 @@ public class TasksPresenter implements TasksContract.Presenter {
     }
 
     @Override
-    public void setTaskDone(int localId, int position) {
+    public void setTaskDone(int localId, final int position) {
+        repository.setTaskDone(new DataSource.CallbackServerResponse<Task>() {
+            @Override
+            public void onResponse(Task response) {
+                view.updateTask(response, position);
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        }, localId);
     }
 
     @Override

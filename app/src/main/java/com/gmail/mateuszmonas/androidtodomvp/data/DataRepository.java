@@ -15,7 +15,7 @@ public class DataRepository implements DataSource {
     private DataSource localDataSource;
 
     @Inject
-    public DataRepository(@Remote DataSource remoteDataSource, @Local DataSource localDataSource) {
+    DataRepository(@Remote DataSource remoteDataSource, @Local DataSource localDataSource) {
         this.remoteDataSource = remoteDataSource;
         this.localDataSource = localDataSource;
     }
@@ -58,5 +58,20 @@ public class DataRepository implements DataSource {
         tasks.add(new Task("asdasd", false));
         tasks.add(new Task("asdasd", false));
         callback.onResponse(tasks);
+    }
+
+    @Override
+    public void editTask(CallbackServerResponse<Task> callback, int localId) {
+        callback.onResponse(new Task("dsa", true));
+    }
+
+    @Override
+    public void setTaskDone(CallbackServerResponse<Task> callback, int localId) {
+        callback.onResponse(new Task("dsa", true));
+    }
+
+    @Override
+    public void addNewTask(CallbackServerResponse<Task> callback) {
+
     }
 }

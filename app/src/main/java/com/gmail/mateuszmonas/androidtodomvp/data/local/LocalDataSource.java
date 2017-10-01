@@ -18,4 +18,19 @@ public class LocalDataSource implements DataSource {
     public void getTasks(CallbackServerResponse<ArrayList<Task>> callback, int offset) {
 
     }
+
+    @Override
+    public void editTask(CallbackServerResponse<Task> callback, int localId) {
+
+    }
+
+    @Override
+    public void setTaskDone(CallbackServerResponse<Task> callback, int localId) {
+
+    }
+
+    @Override
+    public void addNewTask(CallbackServerResponse<Task> callback) {
+
+    }
 }

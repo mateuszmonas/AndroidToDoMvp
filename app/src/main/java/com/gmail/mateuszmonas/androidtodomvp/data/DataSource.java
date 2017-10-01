@@ -9,6 +9,12 @@ public interface DataSource {
 
     void getTasks(CallbackServerResponse<ArrayList<Task>> callback, int offset);
 
+    void editTask(CallbackServerResponse<Task> callback, int localId);
+
+    void setTaskDone(CallbackServerResponse<Task> callback, int localId);
+
+    void addNewTask(CallbackServerResponse<Task> callback);
+
     interface CallbackServerResponse<T> {
 
         void onResponse(T response);
