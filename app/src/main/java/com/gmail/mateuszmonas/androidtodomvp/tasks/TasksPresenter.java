@@ -46,4 +46,13 @@ public class TasksPresenter implements TasksContract.Presenter {
             }
         }, offset);
     }
+
+    @Override
+    public void setTaskDone(int localId, int position) {
+    }
+
+    @Override
+    public void editTask(int localId, int position) {
+
+    }
 }

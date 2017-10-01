@@ -15,11 +15,17 @@ public class TasksContract {
 
         void setRefreshingView(boolean refreshing);
 
+        void updateTask(Task task, int position);
+
     }
 
     interface Presenter extends BasePresenter{
 
         void loadTasks(int offset, boolean forceUpdate);
+
+        void setTaskDone(int localId, int position);
+
+        void editTask(int localId, int position);
 
     }
 

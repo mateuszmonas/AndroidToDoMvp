@@ -1,87 +1,63 @@
 package com.gmail.mateuszmonas.androidtodomvp.data.objects;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+public class Task {
+    private int globalId;
+    private int localId;
+    private String description;
+    private boolean done;
 
-public class Task implements Parcelable {
-    private int _id;
-    private String _description;
-    private boolean _done;
-
-    Task(int _id, String _description, boolean _done) {
-        this._id = _id;
-        this._description = _description;
-        this._done = _done;
+    Task(int localId, String description, boolean done) {
+        this.localId = localId;
+        this.description = description;
+        this.done = done;
     }
 
-    public Task(String _description, boolean _done) {
-        this._description = _description;
-        this._done=_done;
+    public Task(String description, boolean done) {
+        this.description = description;
+        this.done = done;
     }
 
-    Task(String _description) {
-        this._description = _description;
-        this._done=false;
-    }
-
-    private Task(Parcel source){
-        _description=source.readString();
-        _id=source.readInt();
-        _done=source.readByte() != 0;
+    Task(String description) {
+        this.description = description;
+        this.done =false;
     }
 
     Task(){
-        _id=0;
-        _description="";
-        _done=false;
+        localId =0;
+        description ="";
+        done =false;
     }
 
-    public int get_id() {
-        return _id;
+    public int getGlobalId() {
+        return globalId;
     }
 
-    void set_id(int _id) {
-        this._id = _id;
+    void setGlobalId(int globalId) {
+        this.globalId = globalId;
     }
 
-    public String get_description() {
-        return _description;
+    public int getLocalId() {
+        return localId;
     }
 
-    void set_description(String _description) {
-        this._description = _description;
+    void setLocalId(int localId) {
+        this.localId = localId;
     }
 
-    public boolean is_done() {
-        return _done;
+    public String getDescription() {
+        return description;
     }
 
-    void set_done(boolean _isDone) {
-        this._done = _isDone;
+    void setDescription(String description) {
+        this.description = description;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public boolean isDone() {
+        return done;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(_description);
-        parcel.writeInt(_id);
-        parcel.writeByte((byte) (_done ? 1 : 0));
+    void setDone(boolean _isDone) {
+        this.done = _isDone;
     }
-
-    public static final Creator<Task> CREATOR = new Creator<Task>() {
-        @Override
-        public Task[] newArray(int size) {
-            return new Task[size];
-        }
-
-        @Override
-        public Task createFromParcel(Parcel source) {
-            return new Task(source);
-        }
-    };
 
 }

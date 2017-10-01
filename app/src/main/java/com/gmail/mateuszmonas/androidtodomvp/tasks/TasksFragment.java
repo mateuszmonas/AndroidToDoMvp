@@ -32,13 +32,13 @@ public class TasksFragment extends Fragment implements TasksContract.View {
     SwipeRefreshLayout swipeRefreshLayout;
     private final TasksListListener listener = new TasksListListener() {
         @Override
-        public void setTaskDone() {
-            Log.d("TaskListListener", "setTaskDone");
+        public void setTaskDone(int localId, int position) {
+            presenter.setTaskDone(localId, position);
         }
 
         @Override
-        public void editTask() {
-            Log.d("TaskListListener", "editTask");
+        public void editTask(int localId, int position) {
+            presenter.editTask(localId, position);
         }
     };
 
@@ -106,11 +106,24 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         swipeRefreshLayout.setRefreshing(refreshing);
     }
 
+    @Override
+    public void updateTask(Task task, int position) {
+        adapter.updateTask(task, position);
+    }
+
     interface TasksListListener{
 
-        void setTaskDone();
+        /**
+         * @param localId - id of task in database
+         * @param position - position of task in the recycler view
+         */
+        void setTaskDone(int localId, int position);
 
-        void editTask();
+        /**
+         * @param localId - id of task in database
+         * @param position - position of task in the recycler view
+         */
+        void editTask(int localId, int position);
 
     }
 }

@@ -34,24 +34,30 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         final Task task = tasks.get(position);
         holder.task = task;
-        holder.isDone.setChecked(task.is_done());
-        holder.taskDescription.setText(task.get_description());
+        holder.isDone.setChecked(task.isDone());
+        holder.localId = task.getLocalId();
+        holder.taskDescription.setText(task.getDescription());
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.setTaskDone();
+                listener.setTaskDone(holder.localId, holder.getAdapterPosition());
             }
         });
         holder.view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                listener.editTask();
+                listener.editTask(holder.localId, holder.getAdapterPosition());
                 return true;
             }
         });
+    }
+
+    void updateTask(Task task, int position){
+        tasks.set(position, task);
+        notifyItemChanged(position);
     }
 
     void replaceData(List<Task> tasks, boolean forceUpdate){
@@ -75,6 +81,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
     class ViewHolder extends RecyclerView.ViewHolder{
         final View view;
         Task task;
+        int localId;
         @BindView(R.id.isDone)
         CheckBox isDone;
         @BindView(R.id.taskDescription)
