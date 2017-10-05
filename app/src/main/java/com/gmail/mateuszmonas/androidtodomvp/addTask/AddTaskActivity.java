@@ -1,7 +1,8 @@
 package com.gmail.mateuszmonas.androidtodomvp.addTask;
 
 
-import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,10 @@ import com.gmail.mateuszmonas.androidtodomvp.ToDoApplication;
 import com.gmail.mateuszmonas.androidtodomvp.utils.ActivityUtils;
 
 public class AddTaskActivity extends AppCompatActivity{
+
+    public static Intent createIntent(Context context){
+        return new Intent(context, AddTaskActivity.class);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
