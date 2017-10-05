@@ -7,7 +7,7 @@ import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 
 import java.util.List;
 
-public class TasksContract {
+public interface TasksContract {
 
     interface View extends BaseView<Presenter>{
 
