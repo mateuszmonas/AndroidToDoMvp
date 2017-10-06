@@ -13,6 +13,7 @@ import com.gmail.mateuszmonas.androidtodomvp.utils.ActivityUtils;
 
 import javax.inject.Inject;
 
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class TasksActivity extends AppCompatActivity {
@@ -24,6 +25,8 @@ public class TasksActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks);
+
+        ButterKnife.bind(this);
 
         TasksFragment tasksFragment = (TasksFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
         if (tasksFragment == null){
@@ -39,4 +42,11 @@ public class TasksActivity extends AppCompatActivity {
                 .build()
                 .inject(this);
     }
+
+    @OnClick(R.id.add)
+    void goToAddTaskActivity(){
+        Intent intent = AddTaskActivity.createIntent(getApplicationContext());
+        startActivity(intent);
+    }
+
 }
