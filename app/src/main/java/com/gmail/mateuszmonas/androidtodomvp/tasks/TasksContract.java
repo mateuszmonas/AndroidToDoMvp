@@ -11,6 +11,8 @@ public interface TasksContract {
 
     interface View extends BaseView<Presenter>{
 
+        void startEditTaskActivity(int localId);
+
         void showTasks(List<Task> tasks, boolean forceUpdate);
 
         void setRefreshingView(boolean refreshing);
@@ -25,7 +27,7 @@ public interface TasksContract {
 
         void setTaskDone(int localId, int position);
 
-        void editTask(int localId, int position);
+        void editTask(int localId);
 
     }
 

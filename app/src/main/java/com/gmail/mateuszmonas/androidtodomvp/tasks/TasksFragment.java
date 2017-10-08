@@ -1,5 +1,6 @@
 package com.gmail.mateuszmonas.androidtodomvp.tasks;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gmail.mateuszmonas.androidtodomvp.R;
+import com.gmail.mateuszmonas.androidtodomvp.addTask.AddTaskActivity;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
 
         @Override
         public void editTask(int localId, int position) {
-            presenter.editTask(localId, position);
+            presenter.editTask(localId);
         }
     };
 
@@ -104,6 +106,12 @@ public class TasksFragment extends Fragment implements TasksContract.View {
     @Override
     public void setRefreshingView(boolean refreshing) {
         swipeRefreshLayout.setRefreshing(refreshing);
+    }
+
+    @Override
+    public void startEditTaskActivity(int localId){
+        Intent intent = AddTaskActivity.createIntent(getContext(), localId);
+        startActivity(intent);
     }
 
     @Override

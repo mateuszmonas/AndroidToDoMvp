@@ -44,9 +44,13 @@ public class TasksActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.add)
-    void goToAddTaskActivity(){
+    void startAddTaskActivity(){
         Intent intent = AddTaskActivity.createIntent(getApplicationContext());
         startActivity(intent);
     }
 
+    @OnClick(R.id.delete)
+    void deleteFinishedTasks(){
+        // TODO: 10/8/17
+    }
 }

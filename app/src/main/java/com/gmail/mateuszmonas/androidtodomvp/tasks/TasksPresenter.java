@@ -63,7 +63,7 @@ public class TasksPresenter implements TasksContract.Presenter {
     }
 
     @Override
-    public void editTask(int localId, int position) {
-
+    public void editTask(int localId) {
+        view.startEditTaskActivity(localId);
     }
 }
