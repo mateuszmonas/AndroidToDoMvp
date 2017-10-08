@@ -1,7 +1,11 @@
 package com.gmail.mateuszmonas.androidtodomvp.addTask;
 
 
+import android.util.Log;
+
 import com.gmail.mateuszmonas.androidtodomvp.data.DataRepository;
+import com.gmail.mateuszmonas.androidtodomvp.data.DataSource;
+import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 
 import javax.inject.Inject;
 
@@ -24,5 +28,20 @@ public class AddTaskPresenter implements AddTaskContract.Presenter {
     @Override
     public void start() {
 
+    }
+
+    @Override
+    public void addTask(Task task) {
+        repository.addTask(new DataSource.CallbackServerResponse<Task>() {
+            @Override
+            public void onResponse(Task response) {
+
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        }, task);
     }
 }

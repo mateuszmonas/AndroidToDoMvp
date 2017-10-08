@@ -2,21 +2,31 @@ package com.gmail.mateuszmonas.androidtodomvp.addTask;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.gmail.mateuszmonas.androidtodomvp.R;
 import com.gmail.mateuszmonas.androidtodomvp.ToDoApplication;
 import com.gmail.mateuszmonas.androidtodomvp.utils.ActivityUtils;
 
+import javax.inject.Inject;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class AddTaskActivity extends AppCompatActivity{
 
+    @Inject AddTaskPresenter presenter;
+
     private static final String EXTRA_LOCAL_ID = "LOCAL_ID";
+    @BindView(R.id.confirm)
+    ImageButton confirm;
 
     public static Intent createIntent(Context context, int localId){
         Intent intent = new Intent(context, AddTaskActivity.class);
@@ -48,9 +58,8 @@ public class AddTaskActivity extends AppCompatActivity{
                 .inject(this);
     }
 
-    @OnClick(R.id.confirm)
-    void confirmNewTask(){
-        // TODO: 10/8/17
+    void setConfirmNewTaskListener(View.OnClickListener listener){
+        confirm.setOnClickListener(listener);
     }
 
     @OnClick(R.id.cancel)

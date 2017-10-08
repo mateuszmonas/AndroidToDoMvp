@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gmail.mateuszmonas.androidtodomvp.R;
+import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -29,6 +30,14 @@ public class AddTaskFragment extends Fragment implements AddTaskContract.View {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_task, container, false);
         unbinder = ButterKnife.bind(this, view);
+
+        ((AddTaskActivity) getActivity()).setConfirmNewTaskListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.addTask(new Task("dsaasd", false));
+            }
+        });
+
         return view;
     }
 
