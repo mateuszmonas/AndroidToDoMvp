@@ -32,7 +32,7 @@ public class RemoteDataSource implements DataSource {
     }
 
     @Override
-    public void editTask(CallbackServerResponse<Task> callback, int localId) {
+    public void editTask(CallbackServerResponse<Task> callback, Task task, int localId) {
 
     }
 
@@ -42,7 +42,7 @@ public class RemoteDataSource implements DataSource {
     }
 
     @Override
-    public void addNewTask(CallbackServerResponse<Task> callback) {
+    public void addTask(CallbackServerResponse<Task> callback, Task task) {
 
     }
 

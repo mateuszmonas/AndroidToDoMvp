@@ -6,7 +6,7 @@ public class Task {
     private String description;
     private boolean done;
 
-    Task(int localId, String description, boolean done) {
+    public Task(int localId, String description, boolean done) {
         this.localId = localId;
         this.description = description;
         this.done = done;
@@ -40,7 +40,7 @@ public class Task {
         return localId;
     }
 
-    void setLocalId(int localId) {
+    public void setLocalId(int localId) {
         this.localId = localId;
     }
 
@@ -56,7 +56,7 @@ public class Task {
         return done;
     }
 
-    void setDone(boolean _isDone) {
+    public void setDone(boolean _isDone) {
         this.done = _isDone;
     }
 
