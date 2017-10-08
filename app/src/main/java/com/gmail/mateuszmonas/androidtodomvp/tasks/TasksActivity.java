@@ -3,8 +3,6 @@ package com.gmail.mateuszmonas.androidtodomvp.tasks;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 import com.gmail.mateuszmonas.androidtodomvp.R;
 import com.gmail.mateuszmonas.androidtodomvp.ToDoApplication;
@@ -51,6 +49,6 @@ public class TasksActivity extends AppCompatActivity {
 
     @OnClick(R.id.delete)
     void deleteFinishedTasks(){
-        // TODO: 10/8/17
+        presenter.deleteTasks();
     }
 }

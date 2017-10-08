@@ -29,6 +29,8 @@ public interface TasksContract {
 
         void editTask(int localId);
 
+        void deleteTasks();
+
     }
 
 }

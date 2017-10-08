@@ -46,6 +46,11 @@ public class RemoteDataSource implements DataSource {
 
     }
 
+    @Override
+    public void deleteTasks(CallbackServerResponse<ArrayList<Task>> callback) {
+
+    }
+
     interface ApiEndpoint{
 
     }

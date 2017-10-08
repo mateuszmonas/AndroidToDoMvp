@@ -15,6 +15,8 @@ public interface DataSource {
 
     void addNewTask(CallbackServerResponse<Task> callback);
 
+    void deleteTasks(CallbackServerResponse<ArrayList<Task>> callback);
+
     interface CallbackServerResponse<T> {
 
         void onResponse(T response);

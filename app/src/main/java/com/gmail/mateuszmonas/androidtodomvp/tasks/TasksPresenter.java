@@ -66,4 +66,19 @@ public class TasksPresenter implements TasksContract.Presenter {
     public void editTask(int localId) {
         view.startEditTaskActivity(localId);
     }
+
+    @Override
+    public void deleteTasks() {
+        repository.deleteTasks(new DataSource.CallbackServerResponse<ArrayList<Task>>() {
+            @Override
+            public void onResponse(ArrayList<Task> response) {
+
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
+    }
 }

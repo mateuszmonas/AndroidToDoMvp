@@ -74,4 +74,9 @@ public class DataRepository implements DataSource {
     public void addNewTask(CallbackServerResponse<Task> callback) {
 
     }
+
+    @Override
+    public void deleteTasks(CallbackServerResponse<ArrayList<Task>> callback) {
+
+    }
 }
