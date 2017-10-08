@@ -114,6 +114,8 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         startActivity(intent);
     }
 
+
+
     @Override
     public void updateTask(Task task, int position) {
         adapter.updateTask(task, position);

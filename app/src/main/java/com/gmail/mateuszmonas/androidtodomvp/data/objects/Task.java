@@ -22,6 +22,12 @@ public class Task {
         this.done =false;
     }
 
+    public Task(int localId, String description) {
+        this.localId = localId;
+        this.description = description;
+        this.done =false;
+    }
+
     Task(){
         localId =0;
         description ="";

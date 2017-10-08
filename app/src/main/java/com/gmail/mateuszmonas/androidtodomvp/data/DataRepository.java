@@ -10,9 +10,11 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 //test implementation
 // TODO: 10/8/17
+@Singleton
 public class DataRepository implements DataSource {
 
     private DataSource remoteDataSource;
@@ -43,11 +45,12 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public void editTask(CallbackServerResponse<Task> callback, Task task, int localId) {
+    public void editTask(CallbackServerResponse<Task> callback, Task task) {
         int index = 0;
         for(Task t : tasks){
-            if(t.getLocalId()==localId){
+            if(t.getLocalId()==task.getLocalId()){
                 index = tasks.indexOf(t);
+                task.setDone(t.isDone());
                 tasks.set(index, task);
                 break;
             }
@@ -72,7 +75,7 @@ public class DataRepository implements DataSource {
     public void addTask(CallbackServerResponse<Task> callback, Task task) {
         task.setLocalId(tasks.size()+1);
         tasks.add(task);
-
+        callback.onResponse(task);
     }
 
     @Override

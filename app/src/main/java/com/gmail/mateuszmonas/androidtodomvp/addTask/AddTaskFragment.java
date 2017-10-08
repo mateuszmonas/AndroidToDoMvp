@@ -7,17 +7,31 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.gmail.mateuszmonas.androidtodomvp.R;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class AddTaskFragment extends Fragment implements AddTaskContract.View {
 
     private AddTaskContract.Presenter presenter;
+    private static final String EXTRA_LOCAL_ID = "LOCAL_ID";
     private Unbinder unbinder;
+    private Integer localId = null;
+    @BindView(R.id.newTask)
+    TextView newTask;
+
+    public static AddTaskFragment newInstance(Integer localId){
+        AddTaskFragment fragment = new AddTaskFragment();
+        Bundle arguments = new Bundle();
+        arguments.putInt(EXTRA_LOCAL_ID, localId);
+        fragment.setArguments(arguments);
+        return fragment;
+    }
 
     public static AddTaskFragment newInstance(){
         return new AddTaskFragment();
@@ -25,20 +39,41 @@ public class AddTaskFragment extends Fragment implements AddTaskContract.View {
 
     public AddTaskFragment(){}
 
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_task, container, false);
         unbinder = ButterKnife.bind(this, view);
 
+        Bundle arguments=getArguments();
+        if(arguments!=null){
+            if (arguments.containsKey(EXTRA_LOCAL_ID)){
+                localId=arguments.getInt(EXTRA_LOCAL_ID);
+            }
+        }
+
         ((AddTaskActivity) getActivity()).setConfirmNewTaskListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.addTask(new Task("dsaasd", false));
+                if(!newTask.getText().toString().isEmpty()) {
+                    String description = newTask.getText().toString();
+                    if(localId==null){
+                        presenter.addTask(new Task(description, false));
+                    }else {
+                        presenter.editTask(new Task(localId, description));
+                    }
+                }
             }
         });
 
         return view;
+    }
+
+    @Override
+    public void finishActivity() {
+        getActivity().finish();
     }
 
     @Override

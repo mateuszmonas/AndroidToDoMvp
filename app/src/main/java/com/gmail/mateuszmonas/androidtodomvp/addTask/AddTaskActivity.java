@@ -23,8 +23,8 @@ import butterknife.OnClick;
 public class AddTaskActivity extends AppCompatActivity{
 
     @Inject AddTaskPresenter presenter;
-
     private static final String EXTRA_LOCAL_ID = "LOCAL_ID";
+    private Integer localId = null;
     @BindView(R.id.confirm)
     ImageButton confirm;
 
@@ -45,9 +45,20 @@ public class AddTaskActivity extends AppCompatActivity{
 
         ButterKnife.bind(this);
 
+        Bundle extras = getIntent().getExtras();
+        if(extras!=null){
+            if(extras.containsKey(EXTRA_LOCAL_ID)){
+                localId=extras.getInt(EXTRA_LOCAL_ID);
+            }
+        }
+
         AddTaskFragment addTaskFragment = (AddTaskFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
         if(addTaskFragment==null){
-            addTaskFragment=AddTaskFragment.newInstance();
+            if(localId==null) {
+                addTaskFragment = AddTaskFragment.newInstance();
+            } else {
+                addTaskFragment = AddTaskFragment.newInstance(localId);
+            }
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), addTaskFragment, R.id.contentFrame);
         }
 
@@ -56,6 +67,8 @@ public class AddTaskActivity extends AppCompatActivity{
                 .addTaskPresenterModule(new AddTaskPresenterModule(addTaskFragment))
                 .build()
                 .inject(this);
+
+
     }
 
     void setConfirmNewTaskListener(View.OnClickListener listener){

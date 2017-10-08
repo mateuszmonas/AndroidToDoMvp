@@ -32,7 +32,7 @@ public class RemoteDataSource implements DataSource {
     }
 
     @Override
-    public void editTask(CallbackServerResponse<Task> callback, Task task, int localId) {
+    public void editTask(CallbackServerResponse<Task> callback, Task task) {
 
     }
 

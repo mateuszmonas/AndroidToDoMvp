@@ -11,9 +11,13 @@ public interface AddTaskContract {
 
         void addTask(Task task);
 
+        void editTask(Task task);
+
     }
 
     interface View extends BaseView<Presenter>{
+
+        void finishActivity();
 
     }
 

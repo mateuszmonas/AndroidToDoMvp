@@ -1,13 +1,15 @@
 package com.gmail.mateuszmonas.androidtodomvp.addTask;
 
+import android.widget.TextView;
 
-import android.util.Log;
-
+import com.gmail.mateuszmonas.androidtodomvp.R;
 import com.gmail.mateuszmonas.androidtodomvp.data.DataRepository;
 import com.gmail.mateuszmonas.androidtodomvp.data.DataSource;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 
 import javax.inject.Inject;
+
+import butterknife.BindView;
 
 public class AddTaskPresenter implements AddTaskContract.Presenter {
 
@@ -35,7 +37,22 @@ public class AddTaskPresenter implements AddTaskContract.Presenter {
         repository.addTask(new DataSource.CallbackServerResponse<Task>() {
             @Override
             public void onResponse(Task response) {
+                view.finishActivity();
+            }
 
+            @Override
+            public void onFailure() {
+
+            }
+        }, task);
+    }
+
+    @Override
+    public void editTask(Task task) {
+        repository.editTask(new DataSource.CallbackServerResponse<Task>() {
+            @Override
+            public void onResponse(Task response) {
+               view.finishActivity();
             }
 
             @Override
