@@ -7,6 +7,7 @@ import com.gmail.mateuszmonas.androidtodomvp.data.remote.Remote;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 
 import javax.inject.Inject;
 
@@ -17,7 +18,7 @@ public class DataRepository implements DataSource {
     private DataSource remoteDataSource;
     private DataSource localDataSource;
     //dummy data
-    private ArrayList<Task> tasks = new ArrayList<>(
+    private final ArrayList<Task> tasks = new ArrayList<>(
             Arrays.asList(
                     new Task(1, "asdasd", false),
                     new Task(2, "asdasd", false),
@@ -76,9 +77,9 @@ public class DataRepository implements DataSource {
 
     @Override
     public void deleteTasks(CallbackServerResponse<ArrayList<Task>> callback) {
-        for(Task t : tasks){
-            if(t.isDone()){
-                tasks.remove(t);
+        for(Iterator<Task> it = tasks.iterator(); it.hasNext();){
+            if(it.next().isDone()){
+                it.remove();
             }
         }
         callback.onResponse(tasks);

@@ -72,7 +72,7 @@ public class TasksPresenter implements TasksContract.Presenter {
         repository.deleteTasks(new DataSource.CallbackServerResponse<ArrayList<Task>>() {
             @Override
             public void onResponse(ArrayList<Task> response) {
-
+                view.showTasks(response, true);
             }
 
             @Override
