@@ -4,4 +4,6 @@
     <string name="cancel">cancel</string>
     <string name="add">add</string>
     <string name="delete">delete</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>
