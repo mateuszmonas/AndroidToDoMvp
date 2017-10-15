@@ -2,7 +2,12 @@ package com.gmail.mateuszmonas.androidtodomvp.tasksWidget;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.StrikethroughSpan;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -48,13 +53,21 @@ public class TasksWidgetRemoteViewsFactory implements RemoteViewsService.RemoteV
     @Override
     public RemoteViews getViewAt(int i) {
         RemoteViews views = new RemoteViews("com.gmail.mateuszmonas.androidtodomvp", R.layout.widget_task_item);
-        views.setTextViewText(R.id.taskDescription, tasks.get(i).getDescription());
+
+        SpannableString taskDescription = new SpannableString(tasks.get(i).getDescription());
+
+        if(tasks.get(i).isDone()) {
+            taskDescription.setSpan(new StrikethroughSpan(), 0, tasks.get(i).getDescription().length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        }
+
+        views.setTextViewText(R.id.taskDescription, taskDescription);
 
         Bundle extras = new Bundle();
         extras.putInt(TasksWidgetProvider.LOCAL_ID, tasks.get(i).getLocalId());
 
         Intent fillInIntent = new Intent();
         fillInIntent.putExtra(TasksWidgetProvider.UPDATE_TASK_BUNDLE, extras);
+
         views.setOnClickFillInIntent(R.id.taskDescription, fillInIntent);
         return views;
     }
@@ -71,12 +84,12 @@ public class TasksWidgetRemoteViewsFactory implements RemoteViewsService.RemoteV
 
     @Override
     public long getItemId(int i) {
-        return tasks.get(i).getLocalId();
+        return i;
     }
 
     @Override
     public boolean hasStableIds() {
-        return false;
+        return true;
     }
 
     @Override
