@@ -11,9 +11,11 @@ public class TaskWidgetPresenter implements TaskWidgetContract.Presenter {
     private final DataRepository repository;
 
     @Inject
-    TaskWidgetPresenter(DataRepository repository) {
+    public TaskWidgetPresenter(TaskWidgetContract.View view, DataRepository repository) {
+        this.view = view;
         this.repository = repository;
     }
+
 
     @Override
     public void start() {
@@ -22,6 +24,6 @@ public class TaskWidgetPresenter implements TaskWidgetContract.Presenter {
 
     @Override
     public void setTaskDone(int localId) {
-
+        view.showTasks();
     }
 }

@@ -8,10 +8,12 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.gmail.mateuszmonas.androidtodomvp.R;
 import com.gmail.mateuszmonas.androidtodomvp.ToDoApplication;
+import com.gmail.mateuszmonas.androidtodomvp.data.DataSource;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 import com.gmail.mateuszmonas.androidtodomvp.tasks.TasksActivity;
 
@@ -19,39 +21,46 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class TasksWidgetProvider extends AppWidgetProvider implements TaskWidgetContract.View{
+public class TasksWidgetProvider extends AppWidgetProvider implements TaskWidgetContract.View {
 
     public static final String UPDATE_TASK = "UPDATE_TASK";
     public static final String UPDATE_TASK_BUNDLE = "UPDATE_TASK_BUNDLE";
     public static final String LOCAL_ID = "LOCAL_ID";
     @Inject
     TaskWidgetPresenter presenter;
-
-    @Override
-    public void onRestored(Context context, int[] oldWidgetIds, int[] newWidgetIds) {
-        DaggerTasksWidgetComponent.builder()
-                .dataRepositoryComponent(((ToDoApplication) context.getApplicationContext()).getDataRepositoryComponent())
-                .taskWidgetPresenterModule(new TaskWidgetPresenterModule(this))
-                .build().inject(this);
-        super.onRestored(context, oldWidgetIds, newWidgetIds);
-    }
+    private ComponentName name;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
-        if (intent.getAction().equals(UPDATE_TASK)){
+        this.name = new ComponentName(context, TasksWidgetProvider.class);
+        final AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        if (intent.getAction().equals(UPDATE_TASK)) {
             Bundle bundle = intent.getBundleExtra(UPDATE_TASK_BUNDLE);
-            if(bundle!=null && bundle.containsKey(LOCAL_ID)){
+            if (bundle != null && bundle.containsKey(LOCAL_ID)) {
+                ((ToDoApplication) context.getApplicationContext()).getDataRepositoryComponent().getDataRepository()
+                        .setTaskDone(new DataSource.CallbackServerResponse<Task>() {
+                            @Override
+                            public void onResponse(Task response) {
+                                showTasks(appWidgetManager);
+                            }
+
+                            @Override
+                            public void onFailure() {
+
+                            }
+                        }, bundle.getInt(LOCAL_ID));
             }
         }
     }
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
+
         // Construct the RemoteViews object
         Intent intent = new Intent(context, TaskWidgetService.class);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_tasks);
-        views.setRemoteAdapter(appWidgetId, intent);
+        views.setRemoteAdapter(R.id.tasksListView, intent);
 
         Intent taskIntent = new Intent(context, TasksWidgetProvider.class);
         taskIntent.setAction(TasksWidgetProvider.UPDATE_TASK);
@@ -78,18 +87,16 @@ public class TasksWidgetProvider extends AppWidgetProvider implements TaskWidget
     }
 
     @Override
-    public void setPresenter(TaskWidgetContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void setRefreshingView(boolean refreshing) {
 
     }
 
-    /*if(appWidgetManager!=null){
-            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(
-                    new ComponentName("com.gmail.mateuszmonas.androidtodomvp.taskWidget","TasksWidgetProvider"));
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.tasksListView);
-        }*/
+    @Override
+    public void showTasks() {
+    }
+
+    private void showTasks(AppWidgetManager appWidgetManager) {
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(name);
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.tasksListView);
+    }
 }

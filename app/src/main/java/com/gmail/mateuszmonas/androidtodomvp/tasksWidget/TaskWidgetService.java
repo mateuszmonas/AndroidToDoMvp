@@ -2,6 +2,7 @@ package com.gmail.mateuszmonas.androidtodomvp.tasksWidget;
 
 
 import android.content.Intent;
+import android.util.Log;
 import android.widget.RemoteViewsService;
 
 import com.gmail.mateuszmonas.androidtodomvp.ToDoApplication;
@@ -11,6 +12,10 @@ public class TaskWidgetService extends RemoteViewsService {
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
-        return new TasksWidgetRemoteViewsFactory();
+        TasksWidgetRemoteViewsFactory remoteViewsFactory = new TasksWidgetRemoteViewsFactory();
+        DaggerTaskWidgetRemoteViewsFactoryPresenterComponent.builder()
+                .dataRepositoryComponent(((ToDoApplication) getApplication()).getDataRepositoryComponent())
+                .build().inject(remoteViewsFactory);
+        return remoteViewsFactory;
     }
 }
