@@ -37,8 +37,7 @@ public class TasksActivity extends AppCompatActivity {
                         ((ToDoApplication) getApplication()).getDataRepositoryComponent()
                 )
                 .tasksPresenterModule(new TasksPresenterModule(tasksFragment))
-                .build()
-                .inject(this);
+                .build();
     }
 
     @OnClick(R.id.add)

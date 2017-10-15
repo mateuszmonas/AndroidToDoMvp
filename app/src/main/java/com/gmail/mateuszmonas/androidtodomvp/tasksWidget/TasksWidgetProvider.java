@@ -19,30 +19,29 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class TasksWidgetProvider extends AppWidgetProvider implements TaskWidgetContract.View {
+public class TasksWidgetProvider extends AppWidgetProvider implements TaskWidgetContract.View{
 
     public static final String UPDATE_TASK = "UPDATE_TASK";
     public static final String UPDATE_TASK_BUNDLE = "UPDATE_TASK_BUNDLE";
     public static final String LOCAL_ID = "LOCAL_ID";
     @Inject
     TaskWidgetPresenter presenter;
-    private AppWidgetManager appWidgetManager;
 
-    public TasksWidgetProvider() {
-        super();
-        presenter.setView(this);
+    @Override
+    public void onRestored(Context context, int[] oldWidgetIds, int[] newWidgetIds) {
+        DaggerTasksWidgetComponent.builder()
+                .dataRepositoryComponent(((ToDoApplication) context.getApplicationContext()).getDataRepositoryComponent())
+                .taskWidgetPresenterModule(new TaskWidgetPresenterModule(this))
+                .build().inject(this);
+        super.onRestored(context, oldWidgetIds, newWidgetIds);
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
-        if(appWidgetManager==null) {
-            appWidgetManager = AppWidgetManager.getInstance(context);
-        }
         if (intent.getAction().equals(UPDATE_TASK)){
             Bundle bundle = intent.getBundleExtra(UPDATE_TASK_BUNDLE);
             if(bundle!=null && bundle.containsKey(LOCAL_ID)){
-                presenter.setTaskDone(bundle.getInt(LOCAL_ID));
             }
         }
     }
@@ -53,9 +52,6 @@ public class TasksWidgetProvider extends AppWidgetProvider implements TaskWidget
         Intent intent = new Intent(context, TaskWidgetService.class);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_tasks);
         views.setRemoteAdapter(appWidgetId, intent);
-        DaggerTasksWidgetComponent.builder().
-                dataRepositoryComponent(((ToDoApplication) context.getApplicationContext()).getDataRepositoryComponent())
-                .build();
 
         Intent taskIntent = new Intent(context, TasksWidgetProvider.class);
         taskIntent.setAction(TasksWidgetProvider.UPDATE_TASK);
@@ -87,26 +83,13 @@ public class TasksWidgetProvider extends AppWidgetProvider implements TaskWidget
     }
 
     @Override
-    public void startApplication() {
-
-    }
-
-    @Override
-    public void showTasks(List<Task> tasks, boolean forceUpdate) {
-        if(appWidgetManager!=null){
-            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(
-                    new ComponentName("com.gmail.mateuszmonas.androidtodomvp.taskWidget","TasksWidgetProvider"));
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.tasksListView);
-        }
-    }
-
-    @Override
     public void setRefreshingView(boolean refreshing) {
 
     }
 
-    @Override
-    public void updateTask(Task task, int position) {
-
-    }
+    /*if(appWidgetManager!=null){
+            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(
+                    new ComponentName("com.gmail.mateuszmonas.androidtodomvp.taskWidget","TasksWidgetProvider"));
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.tasksListView);
+        }*/
 }

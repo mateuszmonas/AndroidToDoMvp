@@ -11,22 +11,12 @@ public class TaskWidgetPresenter implements TaskWidgetContract.Presenter {
     private final DataRepository repository;
 
     @Inject
-    public TaskWidgetPresenter(DataRepository repository) {
+    TaskWidgetPresenter(DataRepository repository) {
         this.repository = repository;
     }
 
     @Override
     public void start() {
-
-    }
-
-    @Override
-    public void setView(TaskWidgetContract.View view) {
-        this.view=view;
-    }
-
-    @Override
-    public void loadTasks(int offset, boolean forceUpdate) {
 
     }
 

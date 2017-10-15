@@ -4,6 +4,9 @@ package com.gmail.mateuszmonas.androidtodomvp.tasksWidget;
 import android.content.Intent;
 import android.widget.RemoteViewsService;
 
+import com.gmail.mateuszmonas.androidtodomvp.ToDoApplication;
+import com.gmail.mateuszmonas.androidtodomvp.tasks.TasksPresenterModule;
+
 public class TaskWidgetService extends RemoteViewsService {
 
     @Override
