@@ -6,8 +6,8 @@ import com.gmail.mateuszmonas.androidtodomvp.utils.FragmentScope;
 import dagger.Component;
 
 @FragmentScope
-@Component(dependencies = DataRepositoryComponent.class, modules = TaskWidgetRemoteViewsFactoryModule.class)
-public interface TaskWidgetRemoteViewsFactoryPresenterComponent {
+@Component(dependencies = DataRepositoryComponent.class, modules = TaskWidgetPresenterModule.class)
+public interface TaskWidgetComponent {
 
     void inject(TasksWidgetRemoteViewsFactory remoteViewsFactory);
 

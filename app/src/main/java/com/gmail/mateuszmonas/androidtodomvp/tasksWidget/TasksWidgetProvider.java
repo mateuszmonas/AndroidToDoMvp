@@ -21,13 +21,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class TasksWidgetProvider extends AppWidgetProvider implements TaskWidgetContract.View {
+public class TasksWidgetProvider extends AppWidgetProvider {
 
     public static final String UPDATE_TASK = "UPDATE_TASK";
     public static final String UPDATE_TASK_BUNDLE = "UPDATE_TASK_BUNDLE";
     public static final String LOCAL_ID = "LOCAL_ID";
-    @Inject
-    TaskWidgetPresenter presenter;
     private ComponentName name;
 
     @Override
@@ -84,15 +82,6 @@ public class TasksWidgetProvider extends AppWidgetProvider implements TaskWidget
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
         super.onUpdate(context, appWidgetManager, appWidgetIds);
-    }
-
-    @Override
-    public void setRefreshingView(boolean refreshing) {
-
-    }
-
-    @Override
-    public void showTasks() {
     }
 
     private void showTasks(AppWidgetManager appWidgetManager) {

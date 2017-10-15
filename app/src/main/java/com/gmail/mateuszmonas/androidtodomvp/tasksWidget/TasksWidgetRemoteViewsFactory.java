@@ -3,39 +3,25 @@ package com.gmail.mateuszmonas.androidtodomvp.tasksWidget;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.gmail.mateuszmonas.androidtodomvp.R;
-import com.gmail.mateuszmonas.androidtodomvp.data.DataRepository;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import javax.inject.Inject;
 
-public class TasksWidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
+public class TasksWidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory, TaskWidgetContract.View {
 
     private final ArrayList<Task> tasks;
     @Inject
-    TaskWidgetContract.RemoteViewsFactoryPresenter presenter;
+    TaskWidgetContract.Presenter presenter;
 
     public TasksWidgetRemoteViewsFactory() {
-        tasks = new ArrayList<>(
-                Arrays.asList(
-                        new Task(1, "asdasd", false),
-                        new Task(2, "asdasd", false),
-                        new Task(3, "asdasd", false),
-                        new Task(4, "asdasd", false),
-                        new Task(5, "asdasd", false),
-                        new Task(6, "asdasd", false),
-                        new Task(7, "asdasd", false),
-                        new Task(8, "asdasd", false),
-                        new Task(9, "asdasd", false))
-        );
+        tasks = new ArrayList<>();
     }
 
     @Override
@@ -45,7 +31,9 @@ public class TasksWidgetRemoteViewsFactory implements RemoteViewsService.RemoteV
     @Override
     public void onDataSetChanged() {
         tasks.clear();
-        tasks.addAll(presenter.loadTasks(0, true));
+        if (presenter != null) {
+            presenter.loadTasks(0, true);
+        }
     }
 
     @Override
@@ -89,5 +77,11 @@ public class TasksWidgetRemoteViewsFactory implements RemoteViewsService.RemoteV
     @Override
     public boolean hasStableIds() {
         return false;
+    }
+
+    @Override
+    public void ShowTasks(ArrayList<Task> tasks) {
+        this.tasks.clear();
+        this.tasks.addAll(tasks);
     }
 }

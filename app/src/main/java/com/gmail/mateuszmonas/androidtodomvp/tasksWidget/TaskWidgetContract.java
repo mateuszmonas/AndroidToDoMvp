@@ -10,23 +10,15 @@ import java.util.List;
 
 public interface TaskWidgetContract {
 
-    interface View{
-
-        void setRefreshingView(boolean refreshing);
-
-        void showTasks();
-
-    }
-
     interface Presenter extends BasePresenter{
 
-        void setTaskDone(int localId);
+        void loadTasks(int offset, boolean forceUpdate);
 
     }
 
-    interface  RemoteViewsFactoryPresenter{
+    interface View{
 
-        ArrayList<Task> loadTasks(int offset, boolean forceUpdate);
+        void ShowTasks(ArrayList<Task> tasks);
 
     }
 
