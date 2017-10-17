@@ -2,6 +2,7 @@ package com.gmail.mateuszmonas.androidtodomvp.data;
 
 import com.gmail.mateuszmonas.androidtodomvp.data.local.Local;
 import com.gmail.mateuszmonas.androidtodomvp.data.local.LocalDataSource;
+import com.gmail.mateuszmonas.androidtodomvp.data.local.TasksDatabase;
 import com.gmail.mateuszmonas.androidtodomvp.data.remote.Remote;
 import com.gmail.mateuszmonas.androidtodomvp.data.remote.RemoteDataSource;
 import com.google.gson.Gson;
@@ -26,8 +27,8 @@ public class DataSourceModule {
     @Singleton
     @Provides
     @Local
-    DataSource provideLocalDataSource() {
-        return new LocalDataSource();
+    DataSource provideLocalDataSource(TasksDatabase tasksDatabase) {
+        return new LocalDataSource(tasksDatabase);
     }
 
 }

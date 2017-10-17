@@ -40,8 +40,18 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public void getTasks(CallbackServerResponse<ArrayList<Task>> callback, int offset) {
-        callback.onResponse(tasks);
+    public void getTasks(final CallbackServerResponse<ArrayList<Task>> callback, int offset) {
+        localDataSource.getTasks(new CallbackServerResponse<ArrayList<Task>>() {
+            @Override
+            public void onResponse(ArrayList<Task> response) {
+                callback.onResponse(response);
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        }, offset);
     }
 
     @Override

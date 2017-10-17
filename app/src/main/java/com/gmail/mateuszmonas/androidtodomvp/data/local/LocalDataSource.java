@@ -5,18 +5,27 @@ import com.gmail.mateuszmonas.androidtodomvp.data.DataSource;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
 public class LocalDataSource implements DataSource {
 
+    private final TasksDatabase tasksDatabase;
+
     @Inject
-    public LocalDataSource() {
+    public LocalDataSource(TasksDatabase tasksDatabase) {
+        this.tasksDatabase = tasksDatabase;
     }
 
     @Override
-    public void getTasks(CallbackServerResponse<ArrayList<Task>> callback, int offset) {
-
+    public void getTasks(final CallbackServerResponse<ArrayList<Task>> callback, int offset) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                tasksDatabase.taskDao().getAll().toArray();
+            }
+        }).start();
     }
 
     @Override

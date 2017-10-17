@@ -1,9 +1,17 @@
 package com.gmail.mateuszmonas.androidtodomvp.data.objects;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
+@Entity
 public class Task {
     private int globalId;
+    @PrimaryKey(autoGenerate = true)
     private int localId;
+    @ColumnInfo(name = "description")
     private String description;
+    @ColumnInfo(name = "done")
     private boolean done;
 
     public Task(int localId, String description, boolean done) {
