@@ -1,5 +1,8 @@
 package com.gmail.mateuszmonas.androidtodomvp.tasks;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +10,7 @@ import android.os.Bundle;
 import com.gmail.mateuszmonas.androidtodomvp.R;
 import com.gmail.mateuszmonas.androidtodomvp.ToDoApplication;
 import com.gmail.mateuszmonas.androidtodomvp.addTask.AddTaskActivity;
+import com.gmail.mateuszmonas.androidtodomvp.tasksWidget.TasksWidgetProvider;
 import com.gmail.mateuszmonas.androidtodomvp.utils.ActivityUtils;
 
 import javax.inject.Inject;
@@ -49,5 +53,17 @@ public class TasksActivity extends AppCompatActivity {
     @OnClick(R.id.delete)
     void deleteFinishedTasks(){
         presenter.deleteTasks();
+    }
+
+    @Override
+    protected void onPause() {
+        ActivityUtils.updateWidget(getApplicationContext());
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        ActivityUtils.updateWidget(getApplicationContext());
+        super.onStop();
     }
 }

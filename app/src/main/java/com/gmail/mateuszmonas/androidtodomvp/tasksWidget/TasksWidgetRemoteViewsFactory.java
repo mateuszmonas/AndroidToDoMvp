@@ -19,7 +19,7 @@ import javax.inject.Inject;
 
 public class TasksWidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory, TaskWidgetContract.View {
 
-    private final List<Task> tasks;
+    private List<Task> tasks;
     @Inject
     TaskWidgetContract.Presenter presenter;
 
@@ -33,7 +33,6 @@ public class TasksWidgetRemoteViewsFactory implements RemoteViewsService.RemoteV
 
     @Override
     public void onDataSetChanged() {
-        tasks.clear();
         if (presenter != null) {
             presenter.loadTasks(0, true);
         }
@@ -87,12 +86,11 @@ public class TasksWidgetRemoteViewsFactory implements RemoteViewsService.RemoteV
 
     @Override
     public boolean hasStableIds() {
-        return true;
+        return false;
     }
 
     @Override
     public void ShowTasks(List<Task> tasks) {
-        this.tasks.clear();
-        this.tasks.addAll(tasks);
+        this.tasks=tasks;
     }
 }

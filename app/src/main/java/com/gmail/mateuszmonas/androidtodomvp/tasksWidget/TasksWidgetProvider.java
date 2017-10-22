@@ -16,6 +16,7 @@ import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 import com.gmail.mateuszmonas.androidtodomvp.tasks.TasksActivity;
 
 import io.reactivex.MaybeObserver;
+import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
@@ -55,7 +56,7 @@ public class TasksWidgetProvider extends AppWidgetProvider {
                             public void onComplete() {
 
                             }
-                        }, bundle.getInt(LOCAL_ID));
+                        }, bundle.getLong(LOCAL_ID));
             }
         }
     }

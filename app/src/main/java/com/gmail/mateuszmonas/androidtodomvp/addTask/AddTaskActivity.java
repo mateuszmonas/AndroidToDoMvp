@@ -78,4 +78,16 @@ public class AddTaskActivity extends AppCompatActivity{
     void cancelNewTask(){
         super.onBackPressed();
     }
+
+    @Override
+    protected void onPause() {
+        ActivityUtils.updateWidget(getApplicationContext());
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        ActivityUtils.updateWidget(getApplicationContext());
+        super.onStop();
+    }
 }

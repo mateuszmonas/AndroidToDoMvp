@@ -66,9 +66,9 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
     }
 
     private void setList(List<Task> tasks, boolean forceUpdate){
-        if(forceUpdate){
+        //if(forceUpdate){
             this.tasks.clear();
-        }
+        //}
         this.tasks.addAll(tasks);
     }
 
