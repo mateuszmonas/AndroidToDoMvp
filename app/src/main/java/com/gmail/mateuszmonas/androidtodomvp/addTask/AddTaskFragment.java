@@ -21,14 +21,14 @@ public class AddTaskFragment extends Fragment implements AddTaskContract.View {
     private AddTaskContract.Presenter presenter;
     private static final String EXTRA_LOCAL_ID = "LOCAL_ID";
     private Unbinder unbinder;
-    private Integer localId = null;
+    private Long localId = null;
     @BindView(R.id.newTask)
     TextView newTask;
 
     public static AddTaskFragment newInstance(Integer localId){
         AddTaskFragment fragment = new AddTaskFragment();
         Bundle arguments = new Bundle();
-        arguments.putInt(EXTRA_LOCAL_ID, localId);
+        arguments.putLong(EXTRA_LOCAL_ID, localId);
         fragment.setArguments(arguments);
         return fragment;
     }
@@ -50,7 +50,7 @@ public class AddTaskFragment extends Fragment implements AddTaskContract.View {
         Bundle arguments=getArguments();
         if(arguments!=null){
             if (arguments.containsKey(EXTRA_LOCAL_ID)){
-                localId=arguments.getInt(EXTRA_LOCAL_ID);
+                localId=arguments.getLong(EXTRA_LOCAL_ID);
             }
         }
 

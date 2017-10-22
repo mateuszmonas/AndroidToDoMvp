@@ -2,7 +2,6 @@ package com.gmail.mateuszmonas.androidtodomvp.addTask;
 
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -28,7 +27,7 @@ public class AddTaskActivity extends AppCompatActivity{
     @BindView(R.id.confirm)
     ImageButton confirm;
 
-    public static Intent createIntent(Context context, int localId){
+    public static Intent createIntent(Context context, long localId){
         Intent intent = new Intent(context, AddTaskActivity.class);
         intent.putExtra(EXTRA_LOCAL_ID, localId);
         return intent;

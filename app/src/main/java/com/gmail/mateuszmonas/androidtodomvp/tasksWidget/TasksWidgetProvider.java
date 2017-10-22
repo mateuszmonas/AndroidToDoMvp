@@ -8,18 +8,12 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.gmail.mateuszmonas.androidtodomvp.R;
 import com.gmail.mateuszmonas.androidtodomvp.ToDoApplication;
-import com.gmail.mateuszmonas.androidtodomvp.data.DataSource;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 import com.gmail.mateuszmonas.androidtodomvp.tasks.TasksActivity;
-
-import java.util.List;
-
-import javax.inject.Inject;
 
 import io.reactivex.MaybeObserver;
 import io.reactivex.annotations.NonNull;

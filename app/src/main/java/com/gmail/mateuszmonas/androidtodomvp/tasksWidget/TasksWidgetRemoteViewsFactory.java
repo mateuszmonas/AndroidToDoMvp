@@ -1,7 +1,6 @@
 package com.gmail.mateuszmonas.androidtodomvp.tasksWidget;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -62,7 +61,7 @@ public class TasksWidgetRemoteViewsFactory implements RemoteViewsService.RemoteV
         views.setTextViewText(R.id.taskDescription, taskDescription);
 
         Bundle extras = new Bundle();
-        extras.putInt(TasksWidgetProvider.LOCAL_ID, tasks.get(i).getLocalId());
+        extras.putLong(TasksWidgetProvider.LOCAL_ID, tasks.get(i).getLocalId());
 
         Intent fillInIntent = new Intent();
         fillInIntent.putExtra(TasksWidgetProvider.UPDATE_TASK_BUNDLE, extras);

@@ -1,6 +1,5 @@
 package com.gmail.mateuszmonas.androidtodomvp.tasks;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -34,12 +33,12 @@ public class TasksFragment extends Fragment implements TasksContract.View {
     SwipeRefreshLayout swipeRefreshLayout;
     private final TasksListListener listener = new TasksListListener() {
         @Override
-        public void setTaskDone(int localId, int position) {
+        public void setTaskDone(long localId, int position) {
             presenter.setTaskDone(localId, position);
         }
 
         @Override
-        public void editTask(int localId, int position) {
+        public void editTask(long localId, int position) {
             presenter.editTask(localId);
         }
     };
@@ -114,7 +113,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
     }
 
     @Override
-    public void startEditTaskActivity(int localId){
+    public void startEditTaskActivity(long localId){
         Intent intent = AddTaskActivity.createIntent(getContext(), localId);
         startActivity(intent);
     }
@@ -132,13 +131,13 @@ public class TasksFragment extends Fragment implements TasksContract.View {
          * @param localId - id of task in database
          * @param position - position of task in the recycler view
          */
-        void setTaskDone(int localId, int position);
+        void setTaskDone(long localId, int position);
 
         /**
          * @param localId - id of task in database
          * @param position - position of task in the recycler view
          */
-        void editTask(int localId, int position);
+        void editTask(long localId, int position);
 
     }
 }

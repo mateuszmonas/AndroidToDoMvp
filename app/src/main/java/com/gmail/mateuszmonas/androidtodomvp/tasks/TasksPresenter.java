@@ -2,10 +2,8 @@ package com.gmail.mateuszmonas.androidtodomvp.tasks;
 
 
 import com.gmail.mateuszmonas.androidtodomvp.data.DataRepository;
-import com.gmail.mateuszmonas.androidtodomvp.data.DataSource;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -59,7 +57,7 @@ public class TasksPresenter implements TasksContract.Presenter {
     }
 
     @Override
-    public void setTaskDone(int localId, final int position) {
+    public void setTaskDone(long localId, final int position) {
         repository.setTaskDone(new MaybeObserver<Task>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
@@ -84,7 +82,7 @@ public class TasksPresenter implements TasksContract.Presenter {
     }
 
     @Override
-    public void editTask(int localId) {
+    public void editTask(long localId) {
         view.startEditTaskActivity(localId);
     }
 

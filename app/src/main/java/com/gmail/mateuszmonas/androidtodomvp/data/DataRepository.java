@@ -5,9 +5,6 @@ import com.gmail.mateuszmonas.androidtodomvp.data.local.Local;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 import com.gmail.mateuszmonas.androidtodomvp.data.remote.Remote;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -37,21 +34,21 @@ public class DataRepository implements DataSource {
 
     @Override
     public void editTask(MaybeObserver<Task> observer, Task task) {
-
+        localDataSource.editTask(observer, task);
     }
 
     @Override
-    public void setTaskDone(MaybeObserver<Task> observer, int localId) {
-
+    public void setTaskDone(MaybeObserver<Task> observer, long localId) {
+        localDataSource.setTaskDone(observer, localId);
     }
 
     @Override
-    public void addTask(MaybeObserver<Task> observer, Task task) {
-
+    public void addTask(SingleObserver<Long> observer, Task task) {
+        localDataSource.addTask(observer, task);
     }
 
     @Override
     public void deleteTasks(SingleObserver<List<Task>> observer) {
-
+        localDataSource.deleteTasks(observer);
     }
 }

@@ -40,12 +40,12 @@ public class RemoteDataSource implements DataSource {
     }
 
     @Override
-    public void setTaskDone(MaybeObserver<Task> observer, int localId) {
+    public void setTaskDone(MaybeObserver<Task> observer, long localId) {
 
     }
 
     @Override
-    public void addTask(MaybeObserver<Task> observer, Task task) {
+    public void addTask(SingleObserver<Long> observer, Task task) {
 
     }
 

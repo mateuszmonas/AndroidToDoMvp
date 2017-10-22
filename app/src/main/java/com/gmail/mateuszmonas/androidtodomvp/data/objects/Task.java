@@ -8,7 +8,7 @@ import android.arch.persistence.room.PrimaryKey;
 public class Task {
     private int globalId;
     @PrimaryKey(autoGenerate = true)
-    private int localId;
+    private long localId;
     @ColumnInfo(name = "description")
     private String description;
     @ColumnInfo(name = "done")
@@ -30,7 +30,7 @@ public class Task {
         this.done =false;
     }
 
-    public Task(int localId, String description) {
+    public Task(long localId, String description) {
         this.localId = localId;
         this.description = description;
         this.done =false;
@@ -50,11 +50,11 @@ public class Task {
         this.globalId = globalId;
     }
 
-    public int getLocalId() {
+    public long getLocalId() {
         return localId;
     }
 
-    public void setLocalId(int localId) {
+    public void setLocalId(long localId) {
         this.localId = localId;
     }
 

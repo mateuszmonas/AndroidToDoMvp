@@ -2,7 +2,6 @@ package com.gmail.mateuszmonas.androidtodomvp.tasks;
 
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,7 +81,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
     class ViewHolder extends RecyclerView.ViewHolder{
         final View view;
         Task task;
-        int localId;
+        long localId;
         @BindView(R.id.isDone)
         CheckBox isDone;
         @BindView(R.id.taskDescription)
