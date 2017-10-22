@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.MaybeObserver;
+import io.reactivex.SingleObserver;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
@@ -28,26 +30,27 @@ public class RemoteDataSource implements DataSource {
     }
 
     @Override
-    public void getTasks(CallbackServerResponse<List<Task>> callback, int offset) {
-    }
-
-    @Override
-    public void editTask(CallbackServerResponse<Task> callback, Task task) {
+    public void getTasks(SingleObserver<List<Task>> observer, int offset) {
 
     }
 
     @Override
-    public void setTaskDone(CallbackServerResponse<Task> callback, int localId) {
+    public void editTask(MaybeObserver<Task> observer, Task task) {
 
     }
 
     @Override
-    public void addTask(CallbackServerResponse<Task> callback, Task task) {
+    public void setTaskDone(MaybeObserver<Task> observer, int localId) {
 
     }
 
     @Override
-    public void deleteTasks(CallbackServerResponse<List<Task>> callback) {
+    public void addTask(MaybeObserver<Task> observer, Task task) {
+
+    }
+
+    @Override
+    public void deleteTasks(SingleObserver<List<Task>> observer) {
 
     }
 

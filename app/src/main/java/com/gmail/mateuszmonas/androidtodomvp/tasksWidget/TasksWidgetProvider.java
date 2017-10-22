@@ -21,6 +21,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.MaybeObserver;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+
 public class TasksWidgetProvider extends AppWidgetProvider {
 
     public static final String UPDATE_TASK = "UPDATE_TASK";
@@ -37,14 +41,24 @@ public class TasksWidgetProvider extends AppWidgetProvider {
             Bundle bundle = intent.getBundleExtra(UPDATE_TASK_BUNDLE);
             if (bundle != null && bundle.containsKey(LOCAL_ID)) {
                 ((ToDoApplication) context.getApplicationContext()).getDataRepositoryComponent().getDataRepository()
-                        .setTaskDone(new DataSource.CallbackServerResponse<Task>() {
+                        .setTaskDone(new MaybeObserver<Task>() {
                             @Override
-                            public void onResponse(Task response) {
+                            public void onSubscribe(@NonNull Disposable d) {
+
+                            }
+
+                            @Override
+                            public void onSuccess(@NonNull Task task) {
                                 showTasks(appWidgetManager);
                             }
 
                             @Override
-                            public void onFailure() {
+                            public void onError(@NonNull Throwable e) {
+
+                            }
+
+                            @Override
+                            public void onComplete() {
 
                             }
                         }, bundle.getInt(LOCAL_ID));

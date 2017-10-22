@@ -12,6 +12,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.SingleObserver;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+
 
 public class TaskWidgetPresenter implements TaskWidgetContract.Presenter {
 
@@ -30,14 +34,19 @@ public class TaskWidgetPresenter implements TaskWidgetContract.Presenter {
 
     @Override
     public void loadTasks(int offset, boolean forceUpdate) {
-        repository.getTasks(new DataSource.CallbackServerResponse<List<Task>>() {
+        repository.getTasks(new SingleObserver<List<Task>>() {
             @Override
-            public void onResponse(List<Task> response) {
-                //view.ShowTasks(response);
+            public void onSubscribe(@NonNull Disposable d) {
+
             }
 
             @Override
-            public void onFailure() {
+            public void onSuccess(@NonNull List<Task> tasks) {
+                view.ShowTasks(tasks);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
 
             }
         }, offset);

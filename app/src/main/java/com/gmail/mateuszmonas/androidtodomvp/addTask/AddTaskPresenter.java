@@ -10,6 +10,9 @@ import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import io.reactivex.MaybeObserver;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 
 public class AddTaskPresenter implements AddTaskContract.Presenter {
 
@@ -34,14 +37,24 @@ public class AddTaskPresenter implements AddTaskContract.Presenter {
 
     @Override
     public void addTask(Task task) {
-        repository.addTask(new DataSource.CallbackServerResponse<Task>() {
+        repository.addTask(new MaybeObserver<Task>() {
             @Override
-            public void onResponse(Task response) {
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(@NonNull Task task) {
                 view.finishActivity();
             }
 
             @Override
-            public void onFailure() {
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
 
             }
         }, task);
@@ -49,14 +62,24 @@ public class AddTaskPresenter implements AddTaskContract.Presenter {
 
     @Override
     public void editTask(Task task) {
-        repository.editTask(new DataSource.CallbackServerResponse<Task>() {
+        repository.editTask(new MaybeObserver<Task>() {
             @Override
-            public void onResponse(Task response) {
-               view.finishActivity();
+            public void onSubscribe(@NonNull Disposable d) {
+
             }
 
             @Override
-            public void onFailure() {
+            public void onSuccess(@NonNull Task task) {
+                view.finishActivity();
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
 
             }
         }, task);

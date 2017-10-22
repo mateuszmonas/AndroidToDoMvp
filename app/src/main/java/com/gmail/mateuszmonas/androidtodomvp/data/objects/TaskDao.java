@@ -7,14 +7,17 @@ import android.arch.persistence.room.Query;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Maybe;
+import io.reactivex.Single;
+
 @Dao
 public interface TaskDao {
 
     @Query("SELECT * FROM task")
-    List<Task> getTasks();
+    Single<List<Task>> getTasks();
 
     @Query("SELECT * FROM task where task.localId=:localId")
-    Task getTask(int localId);
+    Maybe<Task> getTask(int localId);
 
 
     @Insert
