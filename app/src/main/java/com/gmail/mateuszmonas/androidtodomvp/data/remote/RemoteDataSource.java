@@ -5,7 +5,7 @@ import com.gmail.mateuszmonas.androidtodomvp.data.DataSource;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -28,7 +28,7 @@ public class RemoteDataSource implements DataSource {
     }
 
     @Override
-    public void getTasks(CallbackServerResponse<ArrayList<Task>> callback, int offset) {
+    public void getTasks(CallbackServerResponse<List<Task>> callback, int offset) {
     }
 
     @Override
@@ -47,7 +47,7 @@ public class RemoteDataSource implements DataSource {
     }
 
     @Override
-    public void deleteTasks(CallbackServerResponse<ArrayList<Task>> callback) {
+    public void deleteTasks(CallbackServerResponse<List<Task>> callback) {
 
     }
 

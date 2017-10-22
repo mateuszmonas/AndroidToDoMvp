@@ -62,6 +62,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
 
     void replaceData(List<Task> tasks, boolean forceUpdate){
         setList(tasks, forceUpdate);
+        
         notifyDataSetChanged();
     }
 

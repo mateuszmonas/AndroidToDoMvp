@@ -6,6 +6,7 @@ import com.gmail.mateuszmonas.androidtodomvp.data.DataSource;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -33,9 +34,9 @@ public class TasksPresenter implements TasksContract.Presenter {
     @Override
     public void loadTasks(int offset, final boolean forceUpdate) {
         view.setRefreshingView(true);
-        repository.getTasks(new DataSource.CallbackServerResponse<ArrayList<Task>>() {
+        repository.getTasks(new DataSource.CallbackServerResponse<List<Task>>() {
             @Override
-            public void onResponse(ArrayList<Task> response) {
+            public void onResponse(List<Task> response) {
                 view.setRefreshingView(false);
                 view.showTasks(response, forceUpdate);
             }
@@ -69,9 +70,9 @@ public class TasksPresenter implements TasksContract.Presenter {
 
     @Override
     public void deleteTasks() {
-        repository.deleteTasks(new DataSource.CallbackServerResponse<ArrayList<Task>>() {
+        repository.deleteTasks(new DataSource.CallbackServerResponse<List<Task>>() {
             @Override
-            public void onResponse(ArrayList<Task> response) {
+            public void onResponse(List<Task> response) {
                 view.showTasks(response, true);
             }
 

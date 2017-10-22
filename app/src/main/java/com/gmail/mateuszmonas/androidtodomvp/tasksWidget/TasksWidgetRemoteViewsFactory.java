@@ -1,13 +1,12 @@
 package com.gmail.mateuszmonas.androidtodomvp.tasksWidget;
 
 
+import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.StrikethroughSpan;
-import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -15,13 +14,13 @@ import com.gmail.mateuszmonas.androidtodomvp.R;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 import javax.inject.Inject;
 
 public class TasksWidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory, TaskWidgetContract.View {
 
-    private final ArrayList<Task> tasks;
+    private final List<Task> tasks;
     @Inject
     TaskWidgetContract.Presenter presenter;
 
@@ -93,7 +92,7 @@ public class TasksWidgetRemoteViewsFactory implements RemoteViewsService.RemoteV
     }
 
     @Override
-    public void ShowTasks(ArrayList<Task> tasks) {
+    public void ShowTasks(List<Task> tasks) {
         this.tasks.clear();
         this.tasks.addAll(tasks);
     }

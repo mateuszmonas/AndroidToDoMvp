@@ -2,10 +2,8 @@ package com.gmail.mateuszmonas.androidtodomvp.tasksWidget;
 
 
 import com.gmail.mateuszmonas.androidtodomvp.BasePresenter;
-import com.gmail.mateuszmonas.androidtodomvp.BaseView;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface TaskWidgetContract {
@@ -18,7 +16,7 @@ public interface TaskWidgetContract {
 
     interface View{
 
-        void ShowTasks(ArrayList<Task> tasks);
+        void ShowTasks(List<Task> tasks);
 
     }
 

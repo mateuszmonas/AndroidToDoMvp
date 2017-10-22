@@ -1,5 +1,6 @@
 package com.gmail.mateuszmonas.androidtodomvp.tasks;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -98,8 +99,13 @@ public class TasksFragment extends Fragment implements TasksContract.View {
     }
 
     @Override
-    public void showTasks(List<Task> tasks, boolean forceUpdate) {
-        adapter.replaceData(tasks, forceUpdate);
+    public void showTasks(final List<Task> tasks, final boolean forceUpdate) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                adapter.replaceData(tasks, forceUpdate);
+            }
+        });
     }
 
     @Override

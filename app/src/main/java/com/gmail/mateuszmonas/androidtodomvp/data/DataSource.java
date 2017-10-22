@@ -3,11 +3,11 @@ package com.gmail.mateuszmonas.androidtodomvp.data;
 
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface DataSource {
 
-    void getTasks(CallbackServerResponse<ArrayList<Task>> callback, int offset);
+    void getTasks(CallbackServerResponse<List<Task>> callback, int offset);
 
     void editTask(CallbackServerResponse<Task> callback, Task task);
 
@@ -15,7 +15,7 @@ public interface DataSource {
 
     void addTask(CallbackServerResponse<Task> callback, Task task);
 
-    void deleteTasks(CallbackServerResponse<ArrayList<Task>> callback);
+    void deleteTasks(CallbackServerResponse<List<Task>> callback);
 
     interface CallbackServerResponse<T> {
 
