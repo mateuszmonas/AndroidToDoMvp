@@ -8,7 +8,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Maybe;
 import io.reactivex.MaybeObserver;
+import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -38,9 +40,39 @@ public class LocalDataSource implements DataSource {
 
     }
 
+    //first we get task to be updated from database
+    //then we change task to done
+    //then we update database by supplying the task
+    //then we return updated task
     @Override
-    public void setTaskDone(MaybeObserver<Task> observer, long localId) {
+    public void setTaskDone(final MaybeObserver<Task> observer, long localId) {
+        MaybeObserver<Task> maybeObserver = new MaybeObserver<Task>() {
+            @Override
+            public void onSubscribe(Disposable d) {
 
+            }
+
+            @Override
+            public void onSuccess(Task task) {
+                task.setDone(!task.isDone());
+                tasksDatabase.taskDao().updateTask(task);
+                Maybe.just(task)
+                        .subscribeOn(AndroidSchedulers.mainThread())
+                        .subscribe(observer);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+            }
+        };
+        tasksDatabase.taskDao().getTask(localId)
+                .subscribeOn(Schedulers.newThread())
+                .subscribe(maybeObserver);
     }
 
     @Override
