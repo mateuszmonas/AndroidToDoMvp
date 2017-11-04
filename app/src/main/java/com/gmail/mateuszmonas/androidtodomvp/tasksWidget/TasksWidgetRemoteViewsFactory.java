@@ -40,6 +40,7 @@ public class TasksWidgetRemoteViewsFactory implements RemoteViewsService.RemoteV
 
     @Override
     public void onDestroy() {
+        presenter=null;
     }
 
     @Override

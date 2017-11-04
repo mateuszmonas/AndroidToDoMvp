@@ -32,7 +32,7 @@ public class TasksWidgetProvider extends AppWidgetProvider {
         super.onReceive(context, intent);
         this.name = new ComponentName(context, TasksWidgetProvider.class);
         final AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        if (intent.getAction().equals(UPDATE_TASK)) {
+        if (intent.getAction()!=null && intent.getAction().equals(UPDATE_TASK)) {
             Bundle bundle = intent.getBundleExtra(UPDATE_TASK_BUNDLE);
             if (bundle != null && bundle.containsKey(LOCAL_ID)) {
                 ((ToDoApplication) context.getApplicationContext()).getDataRepositoryComponent().getDataRepository()
