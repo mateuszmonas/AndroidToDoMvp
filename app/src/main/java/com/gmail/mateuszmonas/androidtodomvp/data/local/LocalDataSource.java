@@ -5,12 +5,13 @@ import com.gmail.mateuszmonas.androidtodomvp.data.DataSource;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 
 import io.reactivex.Maybe;
 import io.reactivex.MaybeObserver;
-import io.reactivex.Scheduler;
+import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -36,8 +37,15 @@ public class LocalDataSource implements DataSource {
     }
 
     @Override
-    public void editTask(MaybeObserver<Task> observer, Task task) {
-
+    public void editTask(MaybeObserver<Task> observer, final Task task) {
+        Maybe.fromCallable(new Callable<Task>() {
+            @Override
+            public Task call() throws Exception {
+                tasksDatabase.taskDao().updateTask(task);
+                return task;
+            }
+        }).subscribeOn(Schedulers.newThread())
+                .subscribe(observer);
     }
 
     //first we get task to be updated from database
@@ -57,7 +65,7 @@ public class LocalDataSource implements DataSource {
                 task.setDone(!task.isDone());
                 tasksDatabase.taskDao().updateTask(task);
                 Maybe.just(task)
-                        .subscribeOn(AndroidSchedulers.mainThread())
+                        .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(observer);
             }
 

@@ -23,7 +23,7 @@ public class AddTaskActivity extends AppCompatActivity{
 
     @Inject AddTaskPresenter presenter;
     private static final String EXTRA_LOCAL_ID = "LOCAL_ID";
-    private Integer localId = null;
+    private Long localId = null;
     @BindView(R.id.confirm)
     ImageButton confirm;
 
@@ -47,7 +47,7 @@ public class AddTaskActivity extends AppCompatActivity{
         Bundle extras = getIntent().getExtras();
         if(extras!=null){
             if(extras.containsKey(EXTRA_LOCAL_ID)){
-                localId=extras.getInt(EXTRA_LOCAL_ID);
+                localId=extras.getLong(EXTRA_LOCAL_ID);
             }
         }
 

@@ -25,7 +25,7 @@ public class AddTaskFragment extends Fragment implements AddTaskContract.View {
     @BindView(R.id.newTask)
     TextView newTask;
 
-    public static AddTaskFragment newInstance(Integer localId){
+    public static AddTaskFragment newInstance(Long localId){
         AddTaskFragment fragment = new AddTaskFragment();
         Bundle arguments = new Bundle();
         arguments.putLong(EXTRA_LOCAL_ID, localId);
