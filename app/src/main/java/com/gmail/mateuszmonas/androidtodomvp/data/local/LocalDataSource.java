@@ -11,7 +11,6 @@ import javax.inject.Inject;
 
 import io.reactivex.Maybe;
 import io.reactivex.MaybeObserver;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -106,7 +105,26 @@ public class LocalDataSource implements DataSource {
     }
 
     @Override
-    public void deleteTasks(SingleObserver<List<Task>> observer) {
+    public void deleteTasks(final SingleObserver<List<Task>> observer) {
+        tasksDatabase.taskDao().getDoneTasks()
+                .subscribeOn(Schedulers.newThread())
+                .subscribe(new SingleObserver<List<Task>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
 
+                    @Override
+                    public void onSuccess(List<Task> tasks) {
+                        tasksDatabase.taskDao().deleteTask(tasks);
+                        tasksDatabase.taskDao().getTasks()
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(observer);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
     }
 }

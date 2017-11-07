@@ -20,5 +20,4 @@ public interface DataSource {
 
     void deleteTasks(SingleObserver<List<Task>> observer);
 
-
 }
