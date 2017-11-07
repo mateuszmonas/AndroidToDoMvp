@@ -1,16 +1,12 @@
 package com.gmail.mateuszmonas.androidtodomvp.addTask;
 
 import android.util.Log;
-import android.widget.TextView;
 
-import com.gmail.mateuszmonas.androidtodomvp.R;
 import com.gmail.mateuszmonas.androidtodomvp.data.DataRepository;
-import com.gmail.mateuszmonas.androidtodomvp.data.DataSource;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
 import io.reactivex.MaybeObserver;
 import io.reactivex.SingleObserver;
 import io.reactivex.annotations.NonNull;
@@ -36,6 +32,31 @@ public class AddTaskPresenter implements AddTaskContract.Presenter {
     @Override
     public void start() {
 
+    }
+
+    @Override
+    public void getTask(long localId) {
+        repository.getTask(new MaybeObserver<Task>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(Task task) {
+                view.setDescription(task.getDescription());
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        }, localId);
     }
 
     @Override

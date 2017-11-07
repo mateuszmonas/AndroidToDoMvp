@@ -13,9 +13,13 @@ public interface AddTaskContract {
 
         void editTask(Task task);
 
+        void getTask(long localId);
+
     }
 
     interface View extends BaseView<Presenter>{
+
+        void setDescription(String description);
 
         void finishActivity();
 

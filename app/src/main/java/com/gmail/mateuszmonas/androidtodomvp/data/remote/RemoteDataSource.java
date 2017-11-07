@@ -54,6 +54,11 @@ public class RemoteDataSource implements DataSource {
 
     }
 
+    @Override
+    public void getTask(MaybeObserver<Task> observer, long localId) {
+
+    }
+
     interface ApiEndpoint{
 
     }

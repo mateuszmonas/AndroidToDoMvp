@@ -22,8 +22,8 @@ public class AddTaskFragment extends Fragment implements AddTaskContract.View {
     private static final String EXTRA_LOCAL_ID = "LOCAL_ID";
     private Unbinder unbinder;
     private Long localId = null;
-    @BindView(R.id.newTask)
-    TextView newTask;
+    @BindView(R.id.taskDescription)
+    TextView taskDescription;
 
     public static AddTaskFragment newInstance(Long localId){
         AddTaskFragment fragment = new AddTaskFragment();
@@ -39,7 +39,11 @@ public class AddTaskFragment extends Fragment implements AddTaskContract.View {
 
     public AddTaskFragment(){}
 
-
+    @Override
+    public void onDestroy() {
+        unbinder.unbind();
+        super.onDestroy();
+    }
 
     @Nullable
     @Override
@@ -51,14 +55,15 @@ public class AddTaskFragment extends Fragment implements AddTaskContract.View {
         if(arguments!=null){
             if (arguments.containsKey(EXTRA_LOCAL_ID)){
                 localId=arguments.getLong(EXTRA_LOCAL_ID);
+                presenter.getTask(localId);
             }
         }
 
         ((AddTaskActivity) getActivity()).setConfirmNewTaskListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!newTask.getText().toString().isEmpty()) {
-                    String description = newTask.getText().toString();
+                if(!taskDescription.getText().toString().isEmpty()) {
+                    String description = taskDescription.getText().toString();
                     if(localId==null){
                         presenter.addTask(new Task(description, false));
                     }else {
@@ -69,6 +74,11 @@ public class AddTaskFragment extends Fragment implements AddTaskContract.View {
         });
 
         return view;
+    }
+
+    @Override
+    public void setDescription(String description) {
+        taskDescription.setText(description);
     }
 
     @Override

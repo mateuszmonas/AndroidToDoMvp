@@ -51,4 +51,9 @@ public class DataRepository implements DataSource {
     public void deleteTasks(SingleObserver<List<Task>> observer) {
         localDataSource.deleteTasks(observer);
     }
+
+    @Override
+    public void getTask(MaybeObserver<Task> observer, long localId) {
+        localDataSource.getTask(observer, localId);
+    }
 }

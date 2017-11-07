@@ -20,4 +20,6 @@ public interface DataSource {
 
     void deleteTasks(SingleObserver<List<Task>> observer);
 
+    void getTask(MaybeObserver<Task> observer, long localId);
+
 }

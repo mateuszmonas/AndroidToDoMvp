@@ -127,4 +127,12 @@ public class LocalDataSource implements DataSource {
                     }
                 });
     }
+
+    @Override
+    public void getTask(MaybeObserver<Task> observer, long localId) {
+        tasksDatabase.taskDao().getTask(localId)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
 }
