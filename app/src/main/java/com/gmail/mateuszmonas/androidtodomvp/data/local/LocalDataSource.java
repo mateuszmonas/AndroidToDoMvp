@@ -1,6 +1,8 @@
 package com.gmail.mateuszmonas.androidtodomvp.data.local;
 
 
+import android.arch.persistence.room.RxRoom;
+
 import com.gmail.mateuszmonas.androidtodomvp.data.DataSource;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 
@@ -9,6 +11,7 @@ import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 
+import io.reactivex.FlowableSubscriber;
 import io.reactivex.Maybe;
 import io.reactivex.MaybeObserver;
 import io.reactivex.Single;
@@ -134,5 +137,12 @@ public class LocalDataSource implements DataSource {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
+    }
+
+    @Override
+    public void subscribeToTasks(FlowableSubscriber<Object> subscriber) {
+        RxRoom.createFlowable(tasksDatabase, "task")
+            .subscribeOn(Schedulers.newThread())
+            .subscribe(subscriber);
     }
 }

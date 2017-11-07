@@ -10,6 +10,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.reactivex.FlowableSubscriber;
 import io.reactivex.MaybeObserver;
 import io.reactivex.SingleObserver;
 
@@ -55,5 +56,10 @@ public class DataRepository implements DataSource {
     @Override
     public void getTask(MaybeObserver<Task> observer, long localId) {
         localDataSource.getTask(observer, localId);
+    }
+
+    @Override
+    public void subscribeToTasks(FlowableSubscriber<Object> subscriber) {
+        localDataSource.subscribeToTasks(subscriber);
     }
 }

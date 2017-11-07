@@ -14,6 +14,7 @@ import com.gmail.mateuszmonas.androidtodomvp.R;
 import com.gmail.mateuszmonas.androidtodomvp.ToDoApplication;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 import com.gmail.mateuszmonas.androidtodomvp.tasks.TasksActivity;
+import com.gmail.mateuszmonas.androidtodomvp.utils.ActivityUtils;
 
 import io.reactivex.MaybeObserver;
 import io.reactivex.Observable;

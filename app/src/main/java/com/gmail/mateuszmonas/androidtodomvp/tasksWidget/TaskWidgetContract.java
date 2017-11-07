@@ -10,13 +10,11 @@ public interface TaskWidgetContract {
 
     interface Presenter extends BasePresenter{
 
-        void loadTasks(int offset, boolean forceUpdate);
+        List<Task> getTasks();
 
     }
 
     interface View{
-
-        void ShowTasks(List<Task> tasks);
 
     }
 

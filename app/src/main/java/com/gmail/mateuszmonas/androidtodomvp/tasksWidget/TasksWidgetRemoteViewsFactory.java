@@ -23,18 +23,19 @@ public class TasksWidgetRemoteViewsFactory implements RemoteViewsService.RemoteV
     @Inject
     TaskWidgetContract.Presenter presenter;
 
-    public TasksWidgetRemoteViewsFactory() {
+    TasksWidgetRemoteViewsFactory() {
         tasks = new ArrayList<>();
     }
 
     @Override
     public void onCreate() {
+        presenter.start();
     }
 
     @Override
     public void onDataSetChanged() {
         if (presenter != null) {
-            presenter.loadTasks(0, true);
+            tasks=presenter.getTasks();
         }
     }
 
@@ -88,10 +89,5 @@ public class TasksWidgetRemoteViewsFactory implements RemoteViewsService.RemoteV
     @Override
     public boolean hasStableIds() {
         return false;
-    }
-
-    @Override
-    public void ShowTasks(List<Task> tasks) {
-        this.tasks=tasks;
     }
 }

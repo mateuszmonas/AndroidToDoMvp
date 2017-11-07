@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.FlowableSubscriber;
 import io.reactivex.MaybeObserver;
 import io.reactivex.SingleObserver;
 import okhttp3.OkHttpClient;
@@ -56,6 +57,11 @@ public class RemoteDataSource implements DataSource {
 
     @Override
     public void getTask(MaybeObserver<Task> observer, long localId) {
+
+    }
+
+    @Override
+    public void subscribeToTasks(FlowableSubscriber<Object> subscriber) {
 
     }
 

@@ -60,10 +60,4 @@ public class TasksActivity extends AppCompatActivity {
         ActivityUtils.updateWidget(getApplicationContext());
         super.onPause();
     }
-
-    @Override
-    protected void onStop() {
-        ActivityUtils.updateWidget(getApplicationContext());
-        super.onStop();
-    }
 }
