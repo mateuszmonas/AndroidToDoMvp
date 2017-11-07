@@ -17,7 +17,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class TasksWidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory, TaskWidgetContract.View {
+public class TasksWidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
 
     private List<Task> tasks;
     @Inject

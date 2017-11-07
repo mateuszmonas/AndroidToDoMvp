@@ -23,12 +23,10 @@ import io.reactivex.disposables.Disposable;
 public class TaskWidgetPresenter implements TaskWidgetContract.Presenter {
 
     private final DataRepository repository;
-    private final TaskWidgetContract.View view;
     private final List<Task> tasks;
 
     @Inject
-    public TaskWidgetPresenter(DataRepository repository, TaskWidgetContract.View view) {
-        this.view = view;
+    public TaskWidgetPresenter(DataRepository repository) {
         this.repository = repository;
         tasks=new ArrayList<>();
     }

@@ -18,7 +18,7 @@ public class TaskWidgetService extends RemoteViewsService {
         TasksWidgetRemoteViewsFactory remoteViewsFactory = new TasksWidgetRemoteViewsFactory();
         DaggerTaskWidgetComponent.builder()
                 .dataRepositoryComponent(((ToDoApplication) getApplication()).getDataRepositoryComponent())
-                .taskWidgetPresenterModule(new TaskWidgetPresenterModule(remoteViewsFactory))
+                .taskWidgetPresenterModule(new TaskWidgetPresenterModule())
                 .build().inject(remoteViewsFactory);
         return remoteViewsFactory;
     }

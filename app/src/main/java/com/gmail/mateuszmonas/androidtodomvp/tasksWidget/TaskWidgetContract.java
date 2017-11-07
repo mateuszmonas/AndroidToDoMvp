@@ -14,8 +14,4 @@ public interface TaskWidgetContract {
 
     }
 
-    interface View{
-
-    }
-
 }
