@@ -4,10 +4,13 @@ package com.gmail.mateuszmonas.androidtodomvp.tasks;
 import com.gmail.mateuszmonas.androidtodomvp.data.DataRepository;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 
+import org.reactivestreams.Subscription;
+
 import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.FlowableSubscriber;
 import io.reactivex.MaybeObserver;
 import io.reactivex.SingleObserver;
 import io.reactivex.annotations.NonNull;

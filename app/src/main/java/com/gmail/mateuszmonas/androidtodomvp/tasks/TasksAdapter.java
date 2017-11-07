@@ -61,14 +61,11 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
 
     void replaceData(List<Task> tasks, boolean forceUpdate){
         setList(tasks, forceUpdate);
-        
         notifyDataSetChanged();
     }
 
     private void setList(List<Task> tasks, boolean forceUpdate){
-        //if(forceUpdate){
-            this.tasks.clear();
-        //}
+        this.tasks.clear();
         this.tasks.addAll(tasks);
     }
 

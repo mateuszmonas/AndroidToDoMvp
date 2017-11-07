@@ -99,12 +99,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
 
     @Override
     public void showTasks(final List<Task> tasks, final boolean forceUpdate) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                adapter.replaceData(tasks, forceUpdate);
-            }
-        });
+        adapter.replaceData(tasks, forceUpdate);
     }
 
     @Override
