@@ -4,9 +4,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".tasks.TasksFragment"
-    android:id="@+id/swipeRefreshLayout">
+    android:id="@+id/swipeRefreshLayout"
+    style="@style/Layout">
 
     <android.support.v7.widget.RecyclerView
+        android:listSelector="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
+        style="@style/Layout"
         android:id="@+id/tasksListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

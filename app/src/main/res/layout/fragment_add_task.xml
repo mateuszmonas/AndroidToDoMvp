@@ -4,16 +4,18 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragmentAddTask">
+    android:id="@+id/fragmentAddTask"
+    style="@style/Layout">
 
 
     <EditText
         android:gravity="top"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="@dimen/addTextHeight"
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/taskDescription"
+        android:textColor="@android:color/black"
         android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"

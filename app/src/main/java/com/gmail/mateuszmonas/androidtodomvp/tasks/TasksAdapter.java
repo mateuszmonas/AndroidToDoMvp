@@ -1,6 +1,8 @@
 package com.gmail.mateuszmonas.androidtodomvp.tasks;
 
 
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +40,13 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
         holder.task = task;
         holder.isDone.setChecked(task.isDone());
         holder.localId = task.getLocalId();
+        if(task.isDone()) {
+            holder.taskDescription.setPaintFlags(holder.taskDescription.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.taskDescription.setTextColor(Color.rgb(169,169,169));
+        } else {
+            holder.taskDescription.setPaintFlags(holder.taskDescription.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+            holder.taskDescription.setTextColor(Color.rgb(0,0,0));
+        }
         holder.taskDescription.setText(task.getDescription());
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
