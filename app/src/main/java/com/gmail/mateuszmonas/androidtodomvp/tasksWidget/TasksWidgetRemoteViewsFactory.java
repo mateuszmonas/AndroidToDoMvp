@@ -67,7 +67,7 @@ public class TasksWidgetRemoteViewsFactory implements RemoteViewsService.RemoteV
         Intent fillInIntent = new Intent();
         fillInIntent.putExtra(TasksWidgetProvider.UPDATE_TASK_BUNDLE, extras);
 
-        views.setOnClickFillInIntent(R.id.taskDescription, fillInIntent);
+        views.setOnClickFillInIntent(R.id.widgetTaskItem, fillInIntent);
         return views;
     }
 
