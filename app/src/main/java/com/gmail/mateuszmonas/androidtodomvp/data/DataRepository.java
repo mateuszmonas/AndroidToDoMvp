@@ -29,8 +29,8 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public void getTasks(SingleObserver<List<Task>> observer, int offset) {
-        localDataSource.getTasks(observer, offset);
+    public void getTasks(SingleObserver<List<Task>> observer) {
+        localDataSource.getTasks(observer);
     }
 
     @Override

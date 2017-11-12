@@ -2,14 +2,11 @@ package com.gmail.mateuszmonas.androidtodomvp.tasksWidget;
 
 
 import com.gmail.mateuszmonas.androidtodomvp.data.DataRepository;
-import com.gmail.mateuszmonas.androidtodomvp.data.DataSource;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 
 import org.reactivestreams.Subscription;
 
-import java.nio.channels.AsynchronousCloseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -72,7 +69,7 @@ public class TaskWidgetPresenter implements TaskWidgetContract.Presenter {
             public void onError(@NonNull Throwable e) {
 
             }
-        }, 0);
+        });
     }
 
     @Override

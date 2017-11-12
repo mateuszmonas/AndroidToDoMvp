@@ -23,7 +23,7 @@ public interface TasksContract {
 
     interface Presenter extends BasePresenter{
 
-        void loadTasks(int offset, boolean forceUpdate);
+        void loadTasks(boolean forceUpdate);
 
         void setTaskDone(long localId, int position);
 

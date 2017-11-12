@@ -31,7 +31,7 @@ public class RemoteDataSource implements DataSource {
     }
 
     @Override
-    public void getTasks(SingleObserver<List<Task>> observer, int offset) {
+    public void getTasks(SingleObserver<List<Task>> observer) {
 
     }
 

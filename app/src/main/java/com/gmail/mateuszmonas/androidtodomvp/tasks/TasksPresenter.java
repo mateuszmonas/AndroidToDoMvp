@@ -4,13 +4,10 @@ package com.gmail.mateuszmonas.androidtodomvp.tasks;
 import com.gmail.mateuszmonas.androidtodomvp.data.DataRepository;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
 
-import org.reactivestreams.Subscription;
-
 import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.FlowableSubscriber;
 import io.reactivex.MaybeObserver;
 import io.reactivex.SingleObserver;
 import io.reactivex.annotations.NonNull;
@@ -34,11 +31,11 @@ public class TasksPresenter implements TasksContract.Presenter {
 
     @Override
     public void start() {
-        loadTasks(0, false);
+        loadTasks(false);
     }
 
     @Override
-    public void loadTasks(int offset, final boolean forceUpdate) {
+    public void loadTasks(final boolean forceUpdate) {
         view.setRefreshingView(true);
         repository.getTasks(new SingleObserver<List<Task>>() {
             @Override
@@ -56,7 +53,7 @@ public class TasksPresenter implements TasksContract.Presenter {
             public void onError(@NonNull Throwable e) {
 
             }
-        }, offset);
+        });
     }
 
     @Override

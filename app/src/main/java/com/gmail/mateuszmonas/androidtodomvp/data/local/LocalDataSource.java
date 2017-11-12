@@ -31,7 +31,7 @@ public class LocalDataSource implements DataSource {
     }
 
     @Override
-    public void getTasks(SingleObserver<List<Task>> observer, int offset) {
+    public void getTasks(SingleObserver<List<Task>> observer) {
         tasksDatabase.taskDao().getTasks()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

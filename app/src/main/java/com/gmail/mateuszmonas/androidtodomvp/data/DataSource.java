@@ -11,7 +11,7 @@ import io.reactivex.SingleObserver;
 
 public interface DataSource {
 
-    void getTasks(SingleObserver<List<Task>> observer, int offset);
+    void getTasks(SingleObserver<List<Task>> observer);
 
     void editTask(MaybeObserver<Task> observer, Task task);
 
