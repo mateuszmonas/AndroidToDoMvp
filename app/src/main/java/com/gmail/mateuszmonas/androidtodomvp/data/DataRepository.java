@@ -15,7 +15,6 @@ import io.reactivex.MaybeObserver;
 import io.reactivex.SingleObserver;
 
 //test implementation
-// TODO: 10/8/17
 @Singleton
 public class DataRepository implements DataSource {
 
