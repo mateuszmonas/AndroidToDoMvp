@@ -63,7 +63,7 @@ public class AddTaskFragment extends Fragment implements AddTaskContract.View {
             @Override
             public void onClick(View view) {
                 if(!taskDescription.getText().toString().isEmpty()) {
-                    String description = taskDescription.getText().toString();
+                    String description = taskDescription.getText().toString().trim();
                     if(localId==null){
                         presenter.addTask(new Task(description, false));
                     }else {

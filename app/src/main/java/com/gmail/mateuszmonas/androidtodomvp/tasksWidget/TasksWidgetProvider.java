@@ -83,6 +83,7 @@ public class TasksWidgetProvider extends AppWidgetProvider {
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
+        ActivityUtils.updateWidget(context);
     }
 
     @Override
