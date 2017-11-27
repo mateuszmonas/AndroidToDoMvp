@@ -30,6 +30,7 @@ public class TaskWidgetPresenter implements TaskWidgetContract.Presenter {
 
     @Override
     public void start() {
+        loadTasks();
         repository.subscribeToTasks(new FlowableSubscriber<Object>() {
             @Override
             public void onSubscribe(Subscription s) {
@@ -53,7 +54,7 @@ public class TaskWidgetPresenter implements TaskWidgetContract.Presenter {
         });
     }
 
-    public void loadTasks() {
+    private void loadTasks() {
         repository.getTasks(new SingleObserver<List<Task>>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {

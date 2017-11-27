@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.StrikethroughSpan;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -34,6 +35,7 @@ public class TasksWidgetRemoteViewsFactory implements RemoteViewsService.RemoteV
 
     @Override
     public void onDataSetChanged() {
+        Log.d("widget", "presenet");
         if (presenter != null) {
             tasks=presenter.getTasks();
         }
