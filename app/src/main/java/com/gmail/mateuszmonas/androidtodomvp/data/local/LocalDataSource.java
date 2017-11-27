@@ -140,9 +140,10 @@ public class LocalDataSource implements DataSource {
     }
 
     @Override
-    public void subscribeToTasks(FlowableSubscriber<Object> subscriber) {
-        RxRoom.createFlowable(tasksDatabase, "task")
-            .subscribeOn(Schedulers.newThread())
-            .subscribe(subscriber);
+    public void subscribeToTasks(FlowableSubscriber<List<Task>> subscriber) {
+        tasksDatabase.taskDao().getTasksFlowable()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
     }
 }

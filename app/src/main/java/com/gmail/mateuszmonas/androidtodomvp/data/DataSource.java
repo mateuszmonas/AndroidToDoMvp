@@ -23,6 +23,6 @@ public interface DataSource {
 
     void getTask(MaybeObserver<Task> observer, long localId);
 
-    void subscribeToTasks(FlowableSubscriber<Object> subscriber);
+    void subscribeToTasks(FlowableSubscriber<List<Task>> subscriber);
 
 }

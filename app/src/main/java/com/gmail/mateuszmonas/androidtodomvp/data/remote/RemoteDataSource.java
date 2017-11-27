@@ -61,7 +61,7 @@ public class RemoteDataSource implements DataSource {
     }
 
     @Override
-    public void subscribeToTasks(FlowableSubscriber<Object> subscriber) {
+    public void subscribeToTasks(FlowableSubscriber<List<Task>> subscriber) {
 
     }
 

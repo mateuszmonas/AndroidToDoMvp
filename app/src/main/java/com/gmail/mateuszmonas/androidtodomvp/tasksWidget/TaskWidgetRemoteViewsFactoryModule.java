@@ -6,11 +6,11 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class TaskWidgetPresenterModule {
+public class TaskWidgetRemoteViewsFactoryModule {
 
     @Provides
-    public TaskWidgetContract.Presenter getPresenter(DataRepository repository){
-        return new TaskWidgetPresenter(repository);
+    TasksWidgetRemoteViewsFactory getFactory(DataRepository repository){
+        return new TasksWidgetRemoteViewsFactory(repository);
     }
 
 }

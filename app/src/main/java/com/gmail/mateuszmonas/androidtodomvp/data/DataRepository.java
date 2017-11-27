@@ -58,7 +58,7 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public void subscribeToTasks(FlowableSubscriber<Object> subscriber) {
+    public void subscribeToTasks(FlowableSubscriber<List<Task>> subscriber) {
         localDataSource.subscribeToTasks(subscriber);
     }
 }

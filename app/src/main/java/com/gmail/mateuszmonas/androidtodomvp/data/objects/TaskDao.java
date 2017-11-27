@@ -6,9 +6,12 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
+import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 
@@ -17,6 +20,9 @@ public interface TaskDao {
 
     @Query("SELECT * FROM task")
     Single<List<Task>> getTasks();
+
+    @Query("SELECT * FROM task")
+    Flowable<List<Task>> getTasksFlowable();
 
     @Query("SELECT * FROM task where task.localId=:localId")
     Maybe<Task> getTask(long localId);

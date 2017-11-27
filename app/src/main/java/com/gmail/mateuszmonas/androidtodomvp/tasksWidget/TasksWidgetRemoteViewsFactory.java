@@ -11,39 +11,77 @@ import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.gmail.mateuszmonas.androidtodomvp.R;
+import com.gmail.mateuszmonas.androidtodomvp.data.DataRepository;
 import com.gmail.mateuszmonas.androidtodomvp.data.objects.Task;
+
+import org.reactivestreams.Subscription;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.FlowableSubscriber;
+import io.reactivex.SingleObserver;
+import io.reactivex.disposables.Disposable;
+
 public class TasksWidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory{
 
-    private List<Task> tasks;
-    @Inject
-    TaskWidgetContract.Presenter presenter;
+    private List<Task> tasks = new ArrayList<>();
+    private DataRepository repository;
 
-    TasksWidgetRemoteViewsFactory() {
-        tasks = new ArrayList<>();
+    @Inject
+    TasksWidgetRemoteViewsFactory(DataRepository repository) {
+        this.repository=repository;
     }
 
     @Override
     public void onCreate() {
-        presenter.start();
+        repository.getTasks(new SingleObserver<List<Task>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(List<Task> response) {
+                tasks=response;
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        });
     }
 
     @Override
     public void onDataSetChanged() {
-        Log.d("widget", "presenet");
-        if (presenter != null) {
-            tasks=presenter.getTasks();
-        }
+        repository.subscribeToTasks(new FlowableSubscriber<List<Task>>() {
+            @Override
+            public void onSubscribe(Subscription s) {
+                s.request(Long.MAX_VALUE);
+            }
+
+            @Override
+            public void onNext(List<Task> response) {
+                tasks=response;
+            }
+
+            @Override
+            public void onError(Throwable t) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
     }
 
     @Override
     public void onDestroy() {
-        presenter=null;
     }
 
     @Override
