@@ -1,5 +1,3 @@
 # AndroidToDoMvp
 
-In progress
-
-List of thing to do made using MVP architecture
+Checklist made using MVP architecture, dagger 2 and RxJava
